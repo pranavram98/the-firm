@@ -31,7 +31,7 @@ Do **not** append `office.md` — Harvey runs `firm record-leg` after you return
 """
 
 DESCRIPTIONS = {
-    "tyagi": "Procedure/maintainability — brief debate and draft viability. Returns VERDICT and DISPATCH.",
+    "tyagi": "Procedure hunter — lapses in client's favour; brief debate and draft recall. Returns VERDICT and DISPATCH.",
     "mike": "Associate drafter — executes locked brief. Returns DISPATCH.",
     "jessica": "Merit reviewer — cold managing-partner read. Returns VERDICT and DISPATCH.",
 }

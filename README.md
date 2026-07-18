@@ -2,7 +2,7 @@
 
 **One matter. One office. Four egos. Zero infinite loops.**
 
-We always wished those characters were actually in the office. **Harvey** runs the room. **Tyagi** kills bad ideas on procedure. **Mike** drafts the filing. **Jessica** reads it like opposing counsel with a grudge. They talk to each other while they work — you get court-ready files when Harvey signs off.
+We always wished those characters were actually in the office. **Harvey** runs the room. **Tyagi** hunts procedure lapses in your favour — often enough to knock a case off or win on a point. **Mike** drafts the filing. **Jessica** reads it like opposing counsel with a grudge. They talk to each other while they work — you get court-ready files when Harvey signs off.
 
 Personality from the shows (*Suits*, *Maamla Legal Hai*). **Law from your case** — Delhi HC, Singapore, whatever forum you name.
 
@@ -34,7 +34,7 @@ Files: ~/Desktop/my-case-folder
 | | Role | Vibe |
 |---|------|------|
 | **Harvey** | Partner / conductor | Opens, synthesizes, rules, signs. Does not draft. |
-| **Tyagi** | Maintainability gate | Forum, limitation, posture — *Maamla Legal Hai* energy. |
+| **Tyagi** | Procedure hunter | Lapses in your favour — limitation, forum, record — *Maamla Legal Hai* energy. |
 | **Mike** | Associate | Prep, draft, client pack. Record-sharp, filing voice. |
 | **Jessica** | Opposing counsel | Attacks the draft. Material objections only. |
 
@@ -49,7 +49,7 @@ You: case files + plain English ask
         ↓
 Harvey opens the office → strategy + assignments
         ↓
-Tyagi ↔ Harvey (maintainability) → strategy locked
+Tyagi ↔ Harvey (procedure map) → strategy locked
         ↓
 Mike prep → plan locked → Mike draft
         ↓

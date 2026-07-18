@@ -31,7 +31,8 @@ FIRM_ROLES = (
     CLIENT_WORK
     + "**The firm** — common-law matters worldwide; law from `brief.md` (not the TV shows):\n"
     "- **Harvey** (*Suits* — Harvey Specter) — partner; strategy, synthesis, sign-off.\n"
-    "- **Tyagi** (*Maamla Legal Hai* — V.D. Tyagi; **Tyagi only**) — maintainability gate.\n"
+    "- **Tyagi** (*Maamla Legal Hai* — V.D. Tyagi; **Tyagi only**) — procedure hunter: lapses "
+    "in the client's favour; often enough to knock a case off or win on a point.\n"
     "- **Mike** (*Suits* — Mike Ross) — prep + final work product.\n"
     "- **Jessica** (*Suits* — Jessica Pearson) — opposing-counsel / bench read.\n"
     "Shows = personality. Push back and close loops via VERDICT + DISPATCH.\n\n"
@@ -127,7 +128,8 @@ def harvey_proposal(matter: Matter) -> str:
         f"You are **opening the office** — conductor, not clerk. OBJECTIVE: {cfg.get('objective')}\n"
         f"CAUSE TITLE: {cfg.get('cause_title') or '(set jurisdiction & forum in brief)'}\n\n"
         f"Sources:\n{matter.source_listing()}\n\n"
-        "Open the room, set strategy, write the brief, **send Tyagi the maintainability gate**. "
+        "Open the room, set strategy, write the brief, **send Tyagi to map procedure** — lapses "
+        "in the client's favour and exposure we must cure. "
         "After reading synopsis/order, fill **Scope** in `sources/index.md` (what matters, what to skip). "
         "Update harvey-context.md.\n\n"
         "Structure:\n"
@@ -254,7 +256,7 @@ def jessica_office_take(matter: Matter, debate_dir: Path, *, task: str = "") -> 
         "<what you said in the room>\n\n"
         "# Merit preview\n"
         "<numbered risks only if material>\n\n"
-        "No VERDICT — Tyagi owns the gate.\n\n"
+        "No VERDICT — Tyagi owns procedure.\n\n"
         + NO_FABRICATION
     )
 
@@ -283,9 +285,10 @@ def tyagi_brief_debate(matter: Matter, debate_dir: Path, *, task: str = "") -> s
         f"{_leg_open(matter)}"
         f"{OFFICE_ROOM}"
         f"{_harvey_task(task)}"
-        "BRIEF DEBATE — maintainability gate with Harvey. Tyagi ↔ Harvey until you clear.\n\n"
+        "BRIEF DEBATE — procedure map with Harvey. Hunt lapses in the client's favour; flag our "
+        "exposure. Tyagi ↔ Harvey until you clear.\n\n"
         f"{read}\n\n"
-        "Attack maintainability; number objections; FATAL/CURABLE/HARASSMENT-VALUE.\n\n"
+        "Number findings; FATAL/CURABLE/HARASSMENT-VALUE; state strike or cure.\n\n"
         f"{REVIEWER_AUTONOMY}{VERDICT_INSTRUCTION}\n\n{NO_FABRICATION}"
     )
 
@@ -362,12 +365,13 @@ def mike_prep(matter: Matter, prep_dir: Path, *, task: str = "") -> str:
 def tyagi_viability(matter: Matter, round_dir: Path, draft: Path | None, *, task: str = "") -> str:
     if draft and draft.exists():
         draft_ctx = (
-            f"Draft at {draft.relative_to(matter.path)} — gate new procedural exposure.\n"
+            f"Draft at {draft.relative_to(matter.path)} — hunt fresh procedure lapses in the client's "
+            "favour; gate new exposure on our side.\n"
         )
     else:
         draft_ctx = (
-            "Procedure recall — brief is locked. Gate maintainability on prep, outline, "
-            "or drafting plan as it stands.\n"
+            "Procedure recall — brief is locked. Map lapses in the client's favour on prep, "
+            "outline, or drafting plan as it stands; flag our exposure.\n"
         )
     debate = matter.path / "brief-debate" / "final-brief.md"
     debate_note = (
@@ -381,7 +385,7 @@ def tyagi_viability(matter: Matter, round_dir: Path, draft: Path | None, *, task
         f"{_leg_open(matter)}"
         f"{OFFICE_ROOM}"
         f"{_harvey_task(task)}"
-        "**Tyagi** (*Maamla Legal Hai* — maintainability recall). Called back mid-pipeline.\n\n"
+        "**Tyagi** (*Maamla Legal Hai* — procedure recall). Called back mid-pipeline.\n\n"
         f"{read}\n\n"
         "Apply your lens ruthlessly. Number each material objection and state what would "
         f"cure it.\n\n{REVIEWER_AUTONOMY}{VERDICT_INSTRUCTION}\n\n{NO_FABRICATION}"

@@ -1,4 +1,4 @@
-"""Office state machine — sequential gates: Tyagi brief, Mike prep, Jessica OC review."""
+"""Office state machine — sequential gates: Tyagi procedure map, Mike prep, Jessica OC review."""
 
 from __future__ import annotations
 

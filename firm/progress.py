@@ -10,8 +10,8 @@ from .matter import Matter
 
 LEG_HINTS: dict[tuple[str, str], str] = {
     ("harvey", "proposal"): "opening brief — reading record, setting strategy",
-    ("tyagi", "challenge"): "brief debate — maintainability",
-    ("tyagi", "viability"): "viability gate on the draft",
+    ("tyagi", "challenge"): "brief debate — procedure map",
+    ("tyagi", "viability"): "procedure recall on the draft",
     ("harvey", "rebuttal"): "ruling on Tyagi's objections",
     ("mike", "draft"): "drafting the work product",
     ("jessica", "review"): "merit review",
