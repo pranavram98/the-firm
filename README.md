@@ -40,6 +40,8 @@ Files: ~/Desktop/my-case-folder
 
 Hard caps so loops **always** terminate: 3 strategy passes · 2 prep rounds · 3 drafts → ship with residual risk if needed.
 
+**Universal rule:** procedure before merits — every leg, every forum.
+
 ---
 
 ## How a matter runs

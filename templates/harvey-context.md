@@ -8,6 +8,11 @@ you learn what files matter and what to skip.
 
 Update after every brief debate rebuttal, every dispatch, and before every `firm leg`.
 
+## Procedure status
+
+<!-- Tyagi map: weapons in client's favour; our exposure; CLEARED or live items.
+     Universal rule: procedure before merits — nothing merits-heavy ships with open procedure. -->
+
 ## Theory of the case
 
 <!-- forum, jurisdiction (common-law system + court), posture, cause of action, relief,

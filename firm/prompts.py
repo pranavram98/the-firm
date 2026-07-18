@@ -27,8 +27,18 @@ CLIENT_WORK = (
     "`round_cap` 3 Mike drafts — then forced close with residual risk logged.\n\n"
 )
 
+PROCEDURE_FIRST = (
+    "**Universal rule — procedure before merits:** Every leg, every forum, every colleague. "
+    "Limitation, forum, verification, service, record, and registry practice come first. "
+    "If procedure can knock the case off or win on a point, that leads until Tyagi clears "
+    "or Harvey rules otherwise. Do not bury procedure under merits rhetoric. Mike does not "
+    "draft merits-heavy work while open procedure items remain uncleared. Jessica routes "
+    "live procedure to Tyagi before merit spiral.\n\n"
+)
+
 FIRM_ROLES = (
     CLIENT_WORK
+    + PROCEDURE_FIRST
     + "**The firm** — common-law matters worldwide; law from `brief.md` (not the TV shows):\n"
     "- **Harvey** (*Suits* — Harvey Specter) — partner; strategy, synthesis, sign-off.\n"
     "- **Tyagi** (*Maamla Legal Hai* — V.D. Tyagi; **Tyagi only**) — procedure hunter: lapses "
@@ -128,8 +138,9 @@ def harvey_proposal(matter: Matter) -> str:
         f"You are **opening the office** — conductor, not clerk. OBJECTIVE: {cfg.get('objective')}\n"
         f"CAUSE TITLE: {cfg.get('cause_title') or '(set jurisdiction & forum in brief)'}\n\n"
         f"Sources:\n{matter.source_listing()}\n\n"
-        "Open the room, set strategy, write the brief, **send Tyagi to map procedure** — lapses "
-        "in the client's favour and exposure we must cure. "
+        "Open the room, set strategy, write the brief — **procedure before merits**. "
+        "**Send Tyagi to map procedure** — lapses in the client's favour and exposure we must cure "
+        "before Mike researches or drafts merits. "
         "After reading synopsis/order, fill **Scope** in `sources/index.md` (what matters, what to skip). "
         "Update harvey-context.md.\n\n"
         "Structure:\n"
@@ -352,7 +363,8 @@ def mike_prep(matter: Matter, prep_dir: Path, *, task: str = "") -> str:
         "PRE-DRAFT with Harvey — **not** the final work product yet.\n\n"
         f"{read}\n\n"
         "Deliver: outline/structure, record gaps, research list, drafting risks, Mike must/must-not "
-        "proposal for Harvey to rule on.\n\n"
+        "proposal for Harvey to rule on. **Procedure before merits** — if Tyagi has not cleared "
+        "or harvey-context lists open procedure, say so and do not front-load merits research.\n\n"
         "Structure:\n"
         "# Office\n"
         "<what you said to Harvey>\n\n"
@@ -420,6 +432,9 @@ def mike_draft(matter: Matter, round_dir: Path, prior_draft: Path | None) -> str
         f"{read}\n\n"
         "Produce the **final work product** the brief calls for, in markdown. "
         "Pre-draft prep is cleared — this is the filing-ready draft.\n\n"
+        "**Procedure before merits:** lead with procedure where the brief calls for it; never "
+        "bury open Tyagi items under merits sections. If procedural exposure is live, "
+        "DISPATCH: tyagi instead of finishing a merits-heavy draft.\n\n"
         "Implement every item under 'Mike must' in harvey-context.md. "
         "Violate nothing under 'Mike must not'. "
         "Where the brief itself is wrong, add a short 'BRIEF PUSHBACK' section at the end.\n\n"
@@ -441,6 +456,8 @@ def jessica_review(matter: Matter, round_dir: Path, draft: Path, *, task: str = 
         f"{read}\n\n"
         "Use the draft and index — open `sources/` originals only if a cited fact looks wrong.\n\n"
         "Attack like OC: facts vs record, weakest link, bench irritants, exposure. "
+        "**Procedure before merits** — if limitation, forum, verification, service, or record "
+        "is live or unchecked, DISPATCH: tyagi; do not merit-spiral past open procedure.\n"
         "**Material only** — would OC actually say this? Would the judge care?\n"
         "Do not reopen points Harvey ruled or Tyagi cleared unless the record changed.\n\n"
         "**Procedure** (limitation, forum, verification, record) → DISPATCH: tyagi. "

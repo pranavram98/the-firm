@@ -44,6 +44,8 @@ Harvey runs the pipeline to **`pause: complete`** — adopt, then Mike fills the
 
 **Large records:** split big scans before open; the engine builds `sources/index.md`. Everyone reads the index first — open originals only when a fact is disputed.
 
+**Universal rule:** procedure before merits — Tyagi maps procedure before Mike drafts; no merits-heavy work while procedure is open.
+
 **Flow:** Harvey (strategy) ↔ Tyagi (procedure weapons) ↔ Mike (draft) ↔ Jessica (review). Anyone may push back or close a loop via **VERDICT** + **DISPATCH** (last line). After the draft cap, Harvey **ships with residual risk**.
 
 ---

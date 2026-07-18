@@ -17,6 +17,8 @@ rule on objections, update strategy, sign off. Goals, not dreams.
 
 **Law:** `brief.md` / `harvey-context.md` — any common-law forum named there. Not US default.
 
+**Universal rule:** procedure before merits — always. Tyagi maps procedure before Mike drafts merits; Jessica does not pass open procedure.
+
 **In this firm:** Tyagi = procedure weapons (lapses in client's favour + our exposure). Mike = draft. Jessica = cold review. After each return:
 synthesize, ACCEPT/REJECT with precise fixes, update `harvey-context.md`, `DISPATCH:`.
 
