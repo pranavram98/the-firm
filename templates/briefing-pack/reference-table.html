@@ -1,34 +1,72 @@
 <meta charset="utf-8">
 <title>Reference Table</title>
-<link rel="stylesheet" href="styles.css">
-<!-- House structure + style: this column set, one row per contention, every row citing a
-     record basis, authorities tagged. No law baked in — authorities researched per matter. -->
+<!-- GOLD STANDARD (bench 07/2026). The lectern document. Disciplines:
+     · A4 LANDSCAPE, thead repeats on every printed page.
+     · Rows in ARGUMENT ORDER, mirroring the memo's §9 / notes' §III propositions — not
+       discovery order.
+     · Record-basis cells carry the operative VERBATIM QUOTE plus the ¶/p. pin (per the
+       citation key) — a quote counsel can hand up, not a description. Source-file paths
+       appear ONCE, in the key line — never repeated per cell.
+     · Authority cells carry FULL law-report citations, tagged Primary / Secondary /
+       Distinguish / Context.
+     · Include the standing rows most tables forget: standard of review ("findings below
+       neither perverse nor unsupported; reappreciation not warranted"), waiver (objection
+       not taken below), and the adverse-authority triage row.
+     · NO [VERIFY], no "page not pinned", no process language — resolve or excise.
+     No law baked in — researched per matter. -->
+<style>
+  @page { size: A4 landscape; }
+  * { box-sizing:border-box; }
+  html { -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  body { font-family:"Georgia","Times New Roman",serif; font-size:9.5pt; line-height:1.42; color:#000; margin:0; text-align:left; }
+  .doc-head { text-align:center; border-bottom:1.5px solid #000; padding-bottom:8px; margin-bottom:12px; }
+  .doc-head .conf { font-family:Arial,sans-serif; font-size:8pt; letter-spacing:2px; text-transform:uppercase; font-weight:700; margin-bottom:5px; }
+  .doc-head h1 { font-size:16pt; margin:3px 0 2px; }
+  .doc-head .sub { font-size:9.5pt; font-style:italic; color:#222; }
+  .doc-head .cause { font-family:Arial,sans-serif; font-size:8.4pt; margin-top:7px; line-height:1.4; }
+  .keyline { font-family:Arial,sans-serif; font-size:8.2pt; color:#222; border:1px solid #000; padding:5px 9px; margin:8px 0 10px; }
+  table.ref { border-collapse:collapse; width:100%; margin:8px 0; font-size:9pt; text-align:left; }
+  thead th { font-family:Arial,sans-serif; font-size:8.4pt; text-transform:uppercase; letter-spacing:.5px; background:#000; color:#fff; padding:7px 9px; text-align:left; vertical-align:top; }
+  td { border:1px solid #000; padding:7px 9px; vertical-align:top; line-height:1.42; }
+  td:first-child { text-align:center; font-family:Arial,sans-serif; font-weight:700; }
+  tr:nth-child(even) td { background:#f2f2f2; }
+  q { font-style:italic; }
+  .pin { font-family:Arial,sans-serif; font-size:8pt; }
+  .tag { font-family:Arial,sans-serif; font-size:7.4pt; text-transform:uppercase; letter-spacing:.5px; border:1px solid #000; padding:0 4px; margin-left:4px; white-space:nowrap; }
+  .footer-note { font-family:Arial,sans-serif; font-size:7.5pt; color:#333; border-top:1px solid #000; margin-top:14px; padding-top:5px; }
+</style>
 
 <div class="doc-head">
   <div class="conf">Privileged &amp; Confidential — Attorney Work Product</div>
   <h1>Reference Table</h1>
-  <div class="sub">Contentions, record basis, authorities, and answers to counter-grounds</div>
-  <div class="cause">[cause title — forum, number, parties]</div>
+  <div class="sub">Contentions, record basis, authorities, and answers to counter-grounds — in argument order</div>
+  <div class="cause">[cause title — forum, number, parties · hearing date]</div>
 </div>
 
+<div class="keyline"><b>Citation key.</b> [ONE pagination scheme, e.g. "¶/p. pins refer to the impugned order's
+internal pagination (of NNN pp.)"; record source: [single declaration of the source file/bundle]; tags:
+Primary (we rely) · Secondary (supporting) · Distinguish (theirs, distinguished) · Context (background).]</div>
+
 <table class="ref">
-  <tr>
-    <th>#</th>
-    <th>Contention</th>
-    <th>Record basis</th>
-    <th>Authority / proposition</th>
-    <th>Opposing counter-ground</th>
-    <th>Answer / rebuttal note</th>
-  </tr>
+  <thead>
+    <tr>
+      <th style="width:3%">#</th>
+      <th style="width:17%">Contention</th>
+      <th style="width:26%">Record basis (verbatim quote + pin)</th>
+      <th style="width:20%">Authority (full citation)</th>
+      <th style="width:16%">Their counter</th>
+      <th style="width:18%">Answer</th>
+    </tr>
+  </thead>
   <tr>
     <td>1</td>
-    <td>[contention]</td>
-    <td>[source file / exhibit / page]</td>
-    <td>[authority] <span class="tag tag-primary">Primary</span></td>
-    <td>[their counter]</td>
-    <td>[rebuttal]</td>
+    <td>[contention — same order as memo §9 / notes §III]</td>
+    <td><q>[operative words, quoted]</q> <span class="pin">[¶/p. pin]</span></td>
+    <td>[case name, full citation]<span class="tag">Primary</span></td>
+    <td>[their counter-ground, by letter/number]</td>
+    <td>[one-line rebuttal]</td>
   </tr>
-  <!-- tags: tag-primary (we rely) · tag-secondary (supporting) · tag-distinguish (theirs, distinguished) · tag-context (background) -->
 </table>
 
-<div class="footer-note">Every "record basis" cell must cite an actual file in sources/. Prepared by the-firm.</div>
+<div class="footer-note">[Responsible counsel / firm name, place, date]. Every record cell quotes the record
+per the citation key; every authority carries its full citation.</div>

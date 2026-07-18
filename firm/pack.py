@@ -89,7 +89,38 @@ def _ensure_puppeteer(cwd: Path) -> None:
         subprocess.run(["npm", "i", "puppeteer", "--no-audit", "--no-fund"], cwd=cwd, check=True)
 
 
+# FINAL GATE — process language that must never ship in a client deliverable.
+BANNED_IN_FINALS = (
+    "[VERIFY",
+    "[verify",
+    "page not pinned",
+    "Prepared by the-firm",
+    "this leg",
+    "sources/",
+)
+
+
+def pack_gate_violations(pack: Path) -> dict[str, list[str]]:
+    """Scan pack HTML for banned process language. Returns {file: [banned strings found]}."""
+    hits: dict[str, list[str]] = {}
+    for doc in DOCS.values():
+        f = pack / f"{doc}.html"
+        if not f.is_file():
+            continue
+        text = f.read_text(encoding="utf-8")
+        found = [b for b in BANNED_IN_FINALS if b in text]
+        if found:
+            hits[f.name] = found
+    return hits
+
+
 def render_pack(pack: Path) -> list[str]:
+    violations = pack_gate_violations(pack)
+    if violations:
+        detail = "; ".join(f"{f}: {', '.join(b)}" for f, b in violations.items())
+        raise SystemExit(
+            f"FINAL GATE: pack contains process language — resolve or excise before export ({detail})"
+        )
     _ensure_puppeteer(pack)
     subprocess.run(["node", "render.js"], cwd=pack, check=True)
     return [str(p) for p in sorted(pack.glob("*.pdf"))]

@@ -1,30 +1,77 @@
 <meta charset="utf-8">
 <title>Argument Notes</title>
-<link rel="stylesheet" href="styles.css">
-<!-- House structure + style: Roman-numbered speaking sections in this order. No law baked
-     in — statutory anchor and authorities are researched per matter. -->
+<!-- GOLD STANDARD (bench 07/2026). Podium document — counsel must be able to glance and speak.
+     Disciplines:
+     · Citation key line at top: ONE pagination scheme (the impugned order's internal pages).
+     · §I Opening Proposition: the case in 60 seconds, boxed (.prop).
+     · §III: numbered .arg blocks in SPEAKING ORDER. Each opens with a BOLD one-sentence lead
+       (.lead) counsel can read verbatim, then 2–5 supporting sentences with inline ¶/p. pins.
+       No block over ~120 words of support. Waiver/remand answer goes FIRST when the other
+       side's best card is procedural.
+     · Keep the firm's differentiators: scripted anticipated bench questions with prepared
+       verbatim answers, live pivot instructions (.counsel notes), and fallback hedges
+       (e.g. "this dismissal survives on the civil standard too") — these win hearings.
+     · §IV: the grounds table must sweep the opposing pleading COMPLETELY (A–Z / 1–n, every
+       ground, one-line answer, record/authority pin). Full law-report citations everywhere.
+     · NO [VERIFY], no "page not pinned", no process language — resolve or excise before this
+       ships. Target 3 printed pages.
+     No law baked in — researched per matter. -->
+<style>
+  * { box-sizing:border-box; }
+  html { -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  body { font-family:"Georgia","Times New Roman",serif; font-size:10pt; line-height:1.44; color:#000; margin:0; text-align:justify; hyphens:auto; }
+  .doc-head { text-align:center; border-bottom:1.5px solid #000; padding-bottom:8px; margin-bottom:12px; }
+  .doc-head .conf { font-family:Arial,sans-serif; font-size:7pt; letter-spacing:1.8px; text-transform:uppercase; font-weight:700; }
+  .doc-head h1 { font-size:16pt; margin:4px 0 2px; }
+  .doc-head .sub { font-size:9.5pt; font-style:italic; color:#222; }
+  .doc-head .cause { font-family:Arial,sans-serif; font-size:8pt; line-height:1.36; margin-top:7px; }
+  .keyline { font-family:Arial,sans-serif; font-size:8pt; color:#222; border:1px solid #000; padding:5px 9px; margin:8px 0 12px; text-align:left; }
+  h2 { font-family:Arial,sans-serif; font-size:10pt; text-transform:uppercase; letter-spacing:.7px; font-weight:700; margin:16px 0 6px; padding-bottom:3px; border-bottom:1.5px solid #000; page-break-after:avoid; }
+  h2 .num { margin-right:9px; }
+  p { margin:5px 0; }
+  .prop { border-left:3px solid #000; padding:7px 13px; margin:8px 0; }
+  .arg { margin:9px 0; page-break-inside:avoid; }
+  .arg .no { font-family:Arial,sans-serif; font-weight:700; margin-right:6px; }
+  .arg .lead { font-weight:700; }
+  .counsel { font-family:Arial,sans-serif; font-size:8.4pt; border:1px dashed #000; padding:4px 9px; margin:5px 0 5px 18px; text-align:left; }
+  .quote { border-left:3px solid #000; padding:5px 12px; margin:7px 0; font-style:italic; }
+  .cite { font-family:Arial,sans-serif; font-style:normal; font-size:8pt; }
+  table { border-collapse:collapse; width:100%; margin:8px 0; font-size:8.8pt; text-align:left; }
+  thead th { font-family:Arial,sans-serif; font-size:8pt; text-transform:uppercase; letter-spacing:.5px; background:#000; color:#fff; padding:6px 8px; text-align:left; vertical-align:top; }
+  td { border:1px solid #000; padding:5px 8px; vertical-align:top; line-height:1.4; }
+  tr:nth-child(even) td { background:#f2f2f2; }
+  .pagebreak { page-break-before:always; }
+  .footer-note { font-family:Arial,sans-serif; font-size:7.5pt; color:#333; border-top:1px solid #000; margin-top:16px; padding-top:5px; }
+</style>
 
 <div class="doc-head">
   <div class="conf">Privileged &amp; Confidential — Attorney Work Product</div>
   <h1>Argument Notes</h1>
   <div class="sub">Notes for oral argument</div>
-  <div class="cause">[cause title — forum, number, parties]</div>
+  <div class="cause">[cause title — forum, number, parties · hearing date]</div>
 </div>
 
+<div class="keyline"><b>Citation key.</b> [ONE pagination scheme — e.g. "¶/p. pins refer to the impugned
+order's internal pagination (of NNN pp.)". Full law-report citations appear at first use.]</div>
+
 <h2><span class="num">I</span>Opening Proposition</h2>
-<p class="lead">[The one paragraph the forum should carry out of the hearing.]</p>
+<div class="prop">[The case in 60 seconds — the one paragraph the forum should carry out of the hearing.]</div>
 
 <h2><span class="num">II</span>Statutory Anchor</h2>
-<p>[The provision(s) the whole argument stands on.]</p>
-<div class="quote">[key text quoted where decisive] <span class="cite">[provision, source]</span></div>
+<p>[The provision(s) the whole argument stands on — text fetched, stated, quoted where decisive.]</p>
+<div class="quote">[key text] <span class="cite">[provision, source]</span></div>
 
 <h2><span class="num">III</span>The Argument, in Order</h2>
-<p>[Numbered points, in speaking order, each with record basis and authority.]</p>
+<div class="arg"><span class="no">1.</span><span class="lead">[Bold one-sentence lead counsel can speak verbatim — remand/waiver answer first if procedure is their best card.]</span>
+  [Support: 2–5 sentences, inline ¶/p. pins, authority with full citation.]</div>
+<div class="counsel">Note to counsel: [anticipated bench question, verbatim, with the prepared answer / the live pivot: "…and independently, on the documents."]</div>
+<div class="arg"><span class="no">2.</span><span class="lead">[Proposition two.]</span> [Support.]</div>
 
-<h2><span class="num">IV</span>Answers to Opposing Grounds</h2>
-<table class="ref">
-  <tr><th>Their ground</th><th>Our answer</th><th>Record / authority</th></tr>
-  <tr><td>[ground]</td><td>[answer]</td><td>[basis]</td></tr>
+<div class="pagebreak"></div>
+<h2><span class="num">IV</span>Answers to [the Opposing] Grounds [A–Z — complete sweep]</h2>
+<table>
+  <thead><tr><th>Ground</th><th>Their point</th><th>Our answer</th><th>Record / authority</th></tr></thead>
+  <tr><td>[A]</td><td>[their point, one line]</td><td>[answer, one line]</td><td>[¶/p. pin · full citation]</td></tr>
 </table>
 
-<div class="footer-note">Prepared by the-firm.</div>
+<div class="footer-note">[Responsible counsel / firm name, place, date].</div>

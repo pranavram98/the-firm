@@ -1,33 +1,79 @@
 <meta charset="utf-8">
 <title>Client Briefing (2pp)</title>
-<link rel="stylesheet" href="styles.css">
-<!-- House structure + style. Keep this section flow; rename to fit posture (e.g. "The
-     Findings Now Under Appeal" for an appeal). Hard budget: 2 printed A4 pages. Register:
-     plain language the client reads once and understands. No law baked in. -->
+<!-- GOLD STANDARD (matches the submitted house exemplar). A dense two-page brief of the
+     whole matter — the document the client-side team reads to hold the entire case.
+     Hard budget: EXACTLY 2 printed A4 pages (the 8.9pt/1.31 body below is what makes it fit
+     — do not loosen it). Section flow is fixed:
+       Facts · Chronology · The Findings Now Under Appeal (rename to fit posture) ·
+       Questions of Law · Arguments for the [party] · Relief box · Footer.
+     Disciplines:
+     · Facts states the stakes in figures (shares/amounts/₹) in the first lines.
+     · Chronology: .chrono table, bold nowrap date column, one line per event.
+     · Questions of Law: numbered "Whether …" items, argument-ordered.
+     · Arguments: numbered items mirroring the Argument Notes propositions — each one or two
+       sentences, authorities in <span class="auth">italics</span> with full citations,
+       record pins in <span class="rec">small Arial</span> per the citation key.
+     · Relief: boxed, primary + alternative prayer.
+     · Footer doubles as the CITATION KEY: "Prepared for [party] in [cause]"; define the
+       pinned document(s) and their internal pagination; list Sources. Name the responsible
+       counsel — never a pipeline or tool.
+     · NO [VERIFY], no process language. Everything stated is resolved or excised. -->
+<style>
+  * { box-sizing:border-box; }
+  html { -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  body { font-family:"Georgia","Times New Roman",serif; font-size:8.9pt; line-height:1.31; color:#000; margin:0; text-align:justify; hyphens:auto; }
+  .head { text-align:center; border-bottom:1.5px solid #000; padding-bottom:7px; margin-bottom:9px; }
+  .head .conf { font-family:Arial,sans-serif; font-size:7pt; letter-spacing:1.6px; text-transform:uppercase; font-weight:700; }
+  .head h1 { font-size:15pt; margin:3px 0 2px; }
+  .head .cause { font-family:Arial,sans-serif; font-size:7.8pt; line-height:1.34; margin-top:4px; }
+  h2 { font-family:Arial,sans-serif; font-size:8.7pt; text-transform:uppercase; letter-spacing:.6px; font-weight:700;
+       margin:8px 0 2px; padding-bottom:2px; border-bottom:1px solid #000; page-break-after:avoid; }
+  p { margin:3px 0; }
+  b { font-weight:700; }
+  table { border-collapse:collapse; width:100%; margin:4px 0; font-size:8pt; }
+  .chrono td { border:1px solid #000; padding:2.3px 6px; vertical-align:top; text-align:left; line-height:1.26; }
+  .chrono td:first-child { white-space:nowrap; font-family:Arial,sans-serif; font-weight:700; width:80px; font-size:7.5pt; }
+  ol { margin:3px 0; padding-left:16px; } li { margin:3px 0; }
+  .auth { font-style:italic; }
+  .rec { font-family:Arial,sans-serif; font-size:7.6pt; color:#444; }
+  .relief { border:1px solid #000; padding:6px 10px; margin:7px 0 0; text-align:left; }
+  .foot { margin-top:9px; padding-top:5px; border-top:1px solid #000; font-family:Arial,sans-serif; font-size:7pt; color:#333; text-align:left; line-height:1.35; }
+  h2, tr, li { page-break-inside:avoid; }
+</style>
 
-<div class="doc-head">
+<div class="head">
   <div class="conf">Privileged &amp; Confidential</div>
-  <h1>Client Briefing</h1>
-  <div class="sub">Two-page summary</div>
-  <div class="cause">[cause title — forum, number, parties]</div>
+  <h1>Client Briefing — [party / lead respondent]</h1>
+  <div class="cause">[cause title — forum, number, parties · hearing date]</div>
 </div>
 
 <h2>Facts</h2>
-<p>[The facts in plain language.]</p>
+<p>[The matter in a few tight sentences — parties, the transaction/property with its figures
+(counts, amounts, ₹), the statutory provisions engaged, and how it reached this forum.]</p>
 
 <h2>Chronology</h2>
 <table class="chrono">
-  <tr><th>Date</th><th>Event</th></tr>
-  <tr><td>[date]</td><td>[event]</td></tr>
+  <tr><td>[date]</td><td>[event — include every parallel proceeding] <span class="rec">[pin]</span></td></tr>
 </table>
 
-<h2>[The Findings / Order Now in Question]</h2>
-<p>[What was held or ordered, and what is being contested.]</p>
+<h2>[The Findings Now Under Appeal]</h2>
+<p>[What was held or ordered below, finding by finding, with pins — and what is now contested.]</p>
 
 <h2>Questions of Law</h2>
-<p>[The questions, numbered, in plain terms.]</p>
+<ol>
+  <li>Whether [question one, argument-ordered].</li>
+  <li>Whether [question two].</li>
+</ol>
 
-<h2>Our Arguments</h2>
-<p>[Each argument in one or two sentences — what we say and why it wins.]</p>
+<h2>Arguments for the [Respondents]</h2>
+<ol>
+  <li><b>[Bold lead sentence of proposition one.]</b> [One or two supporting sentences —
+  <span class="auth">Case Name, (Year) Vol Reporter Page</span>. <span class="rec">[¶/p. pin]</span>]</li>
+  <li><b>[Proposition two.]</b> [Support.]</li>
+</ol>
 
-<div class="footer-note">Prepared by the-firm.</div>
+<div class="relief"><b>Relief to be sought:</b> [primary prayer]; and, in the alternative,
+[fallback prayer].</div>
+
+<div class="foot">Prepared for [party] in [cause number] ([reference]). "[Short name]" = [the pinned
+document, date] (page references are to that document). Sources: [list]. [Responsible counsel / firm name].</div>

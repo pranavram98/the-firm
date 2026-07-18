@@ -14,7 +14,7 @@ FRONTMATTER_RE = re.compile(r"\A---\s*\n.*?\n---\s*\n", re.S)
 AGENT_HEADER = """---
 name: {name}
 description: {description}
-tools: Read, Grep, Glob, Write, Edit
+tools: {tools}
 model: {model}
 ---
 
@@ -22,13 +22,20 @@ Harvey delegated this leg — you are a **visible subagent** ({surface}).
 
 Before writing:
 - Read `sources/index.md` first, then `brief.md` and `harvey-context.md`
-- Open files in `sources/` only when the index lacks detail or a fact is disputed — Grep before Read on large PDFs
+- Debate/review legs: open files in `sources/` only when the index lacks detail or a fact is disputed — Grep before Read on large PDFs
+- Prep legs are the exception: the record sweep must COVER the record — split scanned PDFs into page-range files and Read them visually; never skip a party's filings for economy
 - Follow the LEG PROMPT Harvey passes in the spawn message
 
 Write your artifact to the **OUT** path exactly (under the matter folder).
 Do **not** append `office.md` — Harvey runs `firm record-leg` after you return.
 
 """
+
+DEFAULT_TOOLS = "Read, Grep, Glob, Write, Edit"
+AGENT_TOOLS = {
+    # Mike splits scanned records into page-range PDFs and renders/fetches during prep.
+    "mike": "Read, Grep, Glob, Write, Edit, Bash",
+}
 
 DESCRIPTIONS = {
     "tyagi": "Procedure hunter — lapses in client's favour; brief debate and draft recall. Returns VERDICT and DISPATCH.",
@@ -51,6 +58,7 @@ def _write_agent(home: Path, surface: str, name: str, dest_dir: Path) -> Path:
     text = AGENT_HEADER.format(
         name=name,
         description=DESCRIPTIONS[name],
+        tools=AGENT_TOOLS.get(name, DEFAULT_TOOLS),
         model=subagent_model(surface, name),
         surface=sc["label"],
     ) + body + "\n"

@@ -1,59 +1,117 @@
 <meta charset="utf-8">
 <title>Briefing Memo</title>
-<link rel="stylesheet" href="styles.css">
-<!-- House structure + style. Sections may be renamed to fit the matter's posture, but keep
-     this skeleton: §-numbered Arial h2s, Georgia justified body, .lead for the paragraph
-     that must land, .chrono for date tables, .quote/.cite for extracts. NO law is baked in
-     here — the drafter researches authorities per matter (sources/ first, else [VERIFY]). -->
+<!-- GOLD STANDARD (bench 07/2026). House structure + style — sections may be renamed to fit
+     the matter's posture, but keep this skeleton and these disciplines:
+     · §1 ends with THE DISPOSITIVE ANSWERS: the 2–4 numbered answers that decide the matter,
+       stated up front in bold. A memo that opens with atmosphere instead of answers fails.
+     · CITATION KEY once, at the top: declare ONE pagination scheme — pin to the impugned
+       order's/pleading's OWN internal pagination (the document the bench holds), never to a
+       merged-bundle page. Map to bundle pages only in an internal annex.
+     · Statutes are STATED, not flagged: fetch the bare-Act text before drafting. Full
+       law-report citations for every authority. NO [VERIFY], no "page not pinned", no
+       pipeline/process language anywhere in this document — resolve or excise.
+     · §6 states the opposing case at full strength, grouped in themes; §9 must answer EVERY
+       opposing ground by letter/number (completeness is measured against THEIR pleading,
+       not our theory). Per-ground one-liners live in the Argument Notes table; §9 carries
+       the argument-ordered propositions.
+     · §9 propositions: numbered, each opening with a bold one-sentence lead that states the
+       proposition; support follows with inline pins. Waiver first where a procedural
+       objection was not taken below.
+     · Target length ≈ 3,000–3,500 words. Cut strategy-meta voice ("colour, not a knockout")
+       — say the point once, in the argument where it lives.
+     No law is baked into this template — the drafter researches per matter. -->
+<style>
+  * { box-sizing:border-box; }
+  html { -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  body { font-family:"Georgia","Times New Roman",serif; font-size:10pt; line-height:1.44; color:#000; margin:0; text-align:justify; hyphens:auto; }
+  .doc-head { text-align:center; border-bottom:1.5px solid #000; padding-bottom:8px; margin-bottom:12px; }
+  .doc-head .conf { font-family:Arial,sans-serif; font-size:7pt; letter-spacing:1.8px; text-transform:uppercase; font-weight:700; }
+  .doc-head h1 { font-size:16pt; margin:4px 0 2px; }
+  .doc-head .sub { font-size:9.5pt; font-style:italic; color:#222; }
+  .doc-head .cause { font-family:Arial,sans-serif; font-size:8pt; line-height:1.36; margin-top:7px; }
+  .keyline { font-family:Arial,sans-serif; font-size:8pt; color:#222; border:1px solid #000; padding:5px 9px; margin:8px 0 12px; text-align:left; }
+  h2 { font-family:Arial,sans-serif; font-size:10pt; text-transform:uppercase; letter-spacing:.7px; font-weight:700; margin:16px 0 6px; padding-bottom:3px; border-bottom:1.5px solid #000; page-break-after:avoid; }
+  h2 .num { margin-right:9px; }
+  p { margin:5px 0; }
+  .lead { font-weight:400; }
+  .answers { border-left:3px solid #000; padding:7px 13px; margin:8px 0; }
+  table { border-collapse:collapse; width:100%; margin:8px 0; font-size:9pt; text-align:left; }
+  th { font-family:Arial,sans-serif; font-size:8.2pt; text-transform:uppercase; letter-spacing:.5px; background:#000; color:#fff; padding:6px 8px; text-align:left; vertical-align:top; }
+  td { border:1px solid #000; padding:6px 8px; vertical-align:top; line-height:1.4; }
+  tr:nth-child(even) td { background:#f2f2f2; }
+  .quote { border-left:3px solid #000; padding:5px 12px; margin:7px 0; font-style:italic; }
+  .cite { font-family:Arial,sans-serif; font-style:normal; font-size:8pt; }
+  .arg { margin:9px 0; page-break-inside:avoid; }
+  .arg .no { font-family:Arial,sans-serif; font-weight:700; margin-right:6px; }
+  .arg .lead-line { font-weight:700; }
+  .footer-note { font-family:Arial,sans-serif; font-size:7.5pt; color:#333; border-top:1px solid #000; margin-top:16px; padding-top:5px; }
+</style>
 
 <div class="doc-head">
   <div class="conf">Privileged &amp; Confidential — Attorney Work Product</div>
   <h1>Briefing Memo</h1>
   <div class="sub">Full brief of the matter</div>
-  <div class="cause">[cause title — forum, number, parties]</div>
+  <div class="cause">[cause title — forum, number, parties · hearing date]</div>
 </div>
 
-<div class="toc">
-  <div>§1 Nature of the Matter</div>
-  <div>§2 Parties</div>
-  <div>§3 Subject of the Dispute</div>
-  <div>§4 Chronology &amp; Procedural History</div>
-  <div>§5 The Statutory Scheme</div>
-  <div>§6 The Opposing Case, in Full</div>
-  <div>§7 The Order / Findings Below</div>
-  <div>§8 The Evidentiary Record</div>
-  <div>§9 Our Arguments</div>
+<div class="keyline"><b>Citation key.</b> [Declare the ONE pagination scheme, e.g. "¶/p. pins refer to the
+impugned order's internal pagination (of NNN pp.)"; name any other pinned documents and their schemes.]</div>
+
+<h2><span class="num">§1</span>Nature of the [Appeal / Matter]</h2>
+<p class="lead">[One paragraph: what this matter is, the forum, the posture, what is at stake — in money and consequence.]</p>
+<div class="answers">
+  <p><b>The answers that decide this [appeal]:</b></p>
+  <p><b>First,</b> [dispositive answer one — the strongest, usually procedural (waiver / not taken below) or the shortest road home].</p>
+  <p><b>Second,</b> [dispositive answer two].</p>
+  <p><b>Third,</b> [dispositive answer three].</p>
 </div>
 
-<h2><span class="num">§1</span>Nature of the Matter</h2>
-<p class="lead">[One paragraph: what this matter is, the forum, the posture, what is at stake.]</p>
+<h2><span class="num">§2</span>Parties and [Corporate] Structure</h2>
+<table>
+  <tr><th>Party</th><th>Capacity / role</th><th>Relationship</th></tr>
+  <tr><td>[party]</td><td>[capacity]</td><td>[structure/relations]</td></tr>
+</table>
 
-<h2><span class="num">§2</span>Parties</h2>
-<p>[Parties, their capacities, corporate/relational structure if relevant.]</p>
+<h2><span class="num">§3</span>The [Property / Subject of the Dispute]</h2>
+<p>[The property / transaction / order in dispute, precisely — including quantum in money.]</p>
 
-<h2><span class="num">§3</span>Subject of the Dispute</h2>
-<p>[The property / transaction / order in dispute, described precisely.]</p>
-
-<h2><span class="num">§4</span>Chronology &amp; Procedural History</h2>
-<table class="chrono">
-  <tr><th>Date</th><th>Event</th><th>Record</th></tr>
-  <tr><td>[date]</td><td>[event]</td><td>[source file / exhibit]</td></tr>
+<h2><span class="num">§4</span>Chronology and Procedural History</h2>
+<!-- Include EVERY parallel proceeding touching the matter (writs, company-law, settlement,
+     criminal) — the record sweep in prep must have found them all. -->
+<table>
+  <tr><th>Date</th><th>Event</th><th>Proceeding</th><th>Record pin</th></tr>
+  <tr><td>[date]</td><td>[event]</td><td>[which proceeding]</td><td>[¶/p. per citation key]</td></tr>
 </table>
 
 <h2><span class="num">§5</span>The Statutory Scheme</h2>
-<p>[Provisions in play, in the order the argument uses them — researched per matter.]</p>
-<div class="quote">[statutory text quoted where decisive] <span class="cite">[provision, source]</span></div>
+<table>
+  <tr><th>Provision</th><th>What it says (fetched text, not paraphrase-from-memory)</th><th>Role in the argument</th></tr>
+  <tr><td>[s. —]</td><td>[operative words, quoted]</td><td>[why it matters here]</td></tr>
+</table>
+<div class="quote">[statutory text quoted in full where decisive] <span class="cite">[provision, source]</span></div>
 
 <h2><span class="num">§6</span>The Opposing Case, in Full</h2>
-<p>[The other side's case at its strongest — every ground, fairly stated.]</p>
+<p>[The other side's case at its strongest — every ground, fairly stated, grouped into themes.
+Per-ground one-line answers live in the Argument Notes table; cross-refer, do not duplicate.]</p>
 
-<h2><span class="num">§7</span>The Order / Findings Below</h2>
-<p>[What was found or ordered, and on what reasoning.]</p>
+<h2><span class="num">§7</span>The Order [/ Findings] Below</h2>
+<p>[The reasoning below as a numbered chain of links — finding by finding, each with its ¶/p. pin —
+so §9 can defend links, not paraphrases.]</p>
 
 <h2><span class="num">§8</span>The Evidentiary Record</h2>
-<p>[What the record actually contains — and does not contain.]</p>
+<table>
+  <tr><th>What the record contains</th><th>Pin</th><th>What it proves</th></tr>
+  <tr><td>[exhibit/document]</td><td>[¶/p.]</td><td>[fact]</td></tr>
+</table>
+<p>[And what the record does <i>not</i> contain — stated plainly.]</p>
 
 <h2><span class="num">§9</span>Our Arguments</h2>
-<p>[Each argument, numbered, with its record basis and authority.]</p>
+<!-- Numbered propositions in ARGUMENT ORDER (the order counsel will speak them). Each opens
+     with a bold one-sentence lead. Full citations. Answer every opposing ground somewhere
+     in §9 or the Notes table — sweep their pleading A–Z before calling this section done. -->
+<div class="arg"><span class="no">1.</span><span class="lead-line">[Proposition one, stated as one bold sentence.]</span>
+  [Support: record pins, quoted words, authority with full citation.]</div>
+<div class="arg"><span class="no">2.</span><span class="lead-line">[Proposition two.]</span> [Support.]</div>
 
-<div class="footer-note">Prepared by the-firm. Every authority traces to the source record or is marked [VERIFY].</div>
+<div class="footer-note">[Responsible counsel / firm name, place, date]. Every authority carries its full
+citation; every record fact its pin per the citation key.</div>

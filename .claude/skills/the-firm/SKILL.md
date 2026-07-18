@@ -46,13 +46,19 @@ Subagents: `~/.claude/agents/{tyagi,mike,jessica}.md` · `firm install-skill cla
 
 ## Large records
 
-At `firm open`, the engine writes **`sources/index.md`** (file list, sizes, text previews). Every leg reads the **index first**; originals in `sources/` **only on doubt**. Harvey fills **Scope** in the index after reading synopsis/order.
+At `firm open`, the engine writes **`sources/index.md`** (file list, sizes, text previews). Debate/review legs read the **index first**; originals in `sources/` **only on doubt**. Harvey fills **Scope** in the index after reading synopsis/order.
+
+**Prep is the exception — coverage beats economy.** Mike's prep opens with a **record sweep**: inventory every document of every party from the index/annexure lists (including every parallel proceeding — writs, company-law, settlement, criminal), read/unread mark per item; **no drafting while any party's substantive submissions are unread**. Scanned PDFs: split page-ranges (pypdf) into `sources/splits/` and Read visually; chart printed-vs-PDF page offsets in the index Scope.
 
 ## Ops (Harvey)
 
 - **`firm record-leg <matter> <artifact>`** — two args after the subcommand (not three).
 - If `firm next` schedules the wrong legs, **edit `# Room assignments` in the opener artifact first** (e.g. drop `jessica | review` from brief debate). The engine now ignores premature review lines, but your proposal should match the phase.
 - **Do not** deep-read `state.py` / `room.py` before that obvious trim — record reading and source splits are the necessary strategy work; engine archaeology is not.
+- **Fetch before lock:** resolve the fetch list (bare-Act text to quote, full law-report citations) before `lock-pre-draft` — fetched, not flagged. `[VERIFY]` is an interim-leg tag only.
+- **Citation key:** one per deliverable; pins to the **impugned order's own internal pagination** (the pages the bench holds). Merged-bundle page numbers live only in an internal mapping annex.
+- **Completeness vs their pleading:** before sign-off, sweep the opponent's grounds A–Z — every ground answered somewhere. Waiver check on every procedural objection: was it taken below?
+- **Final gate:** nothing ships with [VERIFY], "page not pinned", source paths in pins, or pipeline branding — `firm export` refuses a dirty pack. Footers name the responsible counsel.
 
 ## Deliverables (`final/`)
 
