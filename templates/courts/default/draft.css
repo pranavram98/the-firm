@@ -1,0 +1,12 @@
+body {
+  max-width: 800px;
+  margin: 2em auto;
+  font-family: Georgia, "Times New Roman", serif;
+  line-height: 1.55;
+  font-size: 11pt;
+  color: #111;
+}
+h1, h2, h3 { font-family: Arial, Helvetica, sans-serif; }
+h1 { font-size: 14pt; text-align: center; margin-bottom: 1.5em; }
+h2 { font-size: 12pt; margin-top: 1.2em; }
+p { text-align: justify; }

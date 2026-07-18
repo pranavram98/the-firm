@@ -1,0 +1,110 @@
+"""Auto-build sources/index.md — read index first; originals only on doubt."""
+
+from __future__ import annotations
+
+import re
+from pathlib import Path
+
+from .matter import Matter
+
+LARGE_BYTES = 5 * 1024 * 1024
+TEXT_PREVIEW = 600
+TEXT_SUFFIXES = {".md", ".txt", ".csv", ".json", ".yaml", ".yml", ".html", ".htm"}
+
+SCOPE_RE = re.compile(r"(?ms)^## Scope\s*\n(.*?)(?=^## |\Z)")
+
+
+def _human_size(n: int) -> str:
+    if n >= 1024 * 1024:
+        return f"{n / (1024 * 1024):.1f}MB"
+    if n >= 1024:
+        return f"{n / 1024:.0f}KB"
+    return f"{n}B"
+
+
+def _preview(path: Path) -> str:
+    if path.suffix.lower() not in TEXT_SUFFIXES:
+        return ""
+    try:
+        raw = path.read_text(encoding="utf-8", errors="replace")
+    except OSError:
+        return ""
+    one = " ".join(raw.split())
+    if len(one) <= TEXT_PREVIEW:
+        return one
+    return one[:TEXT_PREVIEW].rstrip() + "…"
+
+
+def _auto_note(path: Path, size: int) -> str:
+    if path.suffix.lower() in TEXT_SUFFIXES:
+        prev = _preview(path)
+        if prev:
+            return prev
+    if size >= LARGE_BYTES:
+        return "large — use index + Grep; open original only if fact disputed"
+    if path.suffix.lower() == ".pdf":
+        return "pdf — open only if index/harvey-context lacks the fact"
+    return "open only if index or harvey-context lacks the fact"
+
+
+def _scope_block(existing: str) -> str:
+    m = SCOPE_RE.search(existing)
+    if m and m.group(1).strip():
+        return m.group(1).rstrip() + "\n"
+    return (
+        "<!-- Harvey: after reading synopsis/order, list which files matter, "
+        "what to skip, chronology pointers -->\n"
+    )
+
+
+def build_sources_index(matter: Matter) -> Path:
+    index_path = matter.sources / "index.md"
+    existing = index_path.read_text(encoding="utf-8") if index_path.is_file() else ""
+    scope = _scope_block(existing)
+
+    rows: list[str] = []
+    large: list[str] = []
+    for path in sorted(matter.sources.rglob("*")):
+        if not path.is_file() or path.name == "index.md":
+            continue
+        rel = path.relative_to(matter.sources).as_posix()
+        size = path.stat().st_size
+        note = _auto_note(path, size)
+        rows.append(f"| `{rel}` | {_human_size(size)} | {note} |")
+        if size >= LARGE_BYTES:
+            large.append(rel)
+
+    files_table = "\n".join(rows) if rows else "| *(empty)* | — | — |"
+    large_note = ""
+    if large:
+        large_note = (
+            "\n\n**Large files (>5MB):** "
+            + ", ".join(f"`{n}`" for n in large)
+            + " — do not bulk-read; Grep or targeted Read only.\n"
+        )
+
+    body = (
+        "# Record index\n\n"
+        "**Read this file first on every leg.** Use `brief.md` and `harvey-context.md` next. "
+        "Open files under `sources/` **only** when a fact is disputed or this index lacks detail.\n\n"
+        "## Scope\n\n"
+        f"{scope}\n"
+        "## Files\n\n"
+        "| File | Size | Notes |\n"
+        "|------|------|-------|\n"
+        f"{files_table}\n"
+        f"{large_note}"
+    )
+    index_path.write_text(body, encoding="utf-8")
+    return index_path
+
+
+def source_read_instruction(*, include_legs: str = "") -> str:
+    base = (
+        "Read `sources/index.md` first, then `brief.md` and `harvey-context.md`. "
+        "Open originals in `sources/` only when a fact is disputed or the index lacks detail — "
+        "Grep before Read on large PDFs."
+    )
+    if include_legs:
+        return f"{base}\n{include_legs}"
+    return base
