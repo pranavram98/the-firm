@@ -34,6 +34,6 @@ def test_open_matter_and_ingest(tmp_path, monkeypatch):
     debate.mkdir(exist_ok=True)
     rd = m.next_round_dir()
     prompt = mike_draft(m, rd, None)
-    assert HARVEY_PIPE.splitlines()[0] in prompt
     assert "sources/index.md" in prompt
+    assert "harvey-context.md" in prompt
     assert "every file in sources" not in prompt

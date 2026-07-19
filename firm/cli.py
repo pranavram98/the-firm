@@ -20,7 +20,9 @@ HELP = """
 the-firm — one firm, one matter, subagent handoffs
 
   firm open -o "objective" [-t title] [--surface claude|codex] <files>
-  firm next <matter-path>              next leg JSON
+  firm next <matter-path>              next leg JSON (prompts in .firm/legs/ by default)
+  firm next --embed-prompts <matter>   inline full prompts in JSON (debug only) (prompts in .firm/legs/ by default)
+  firm next --embed-prompts <matter>   inline full prompts in JSON (debug only)
   firm leg-start <matter> <persona> <kind>
   firm record-leg <matter> <artifact>
   firm engine <matter> lock-brief|lock-pre-draft|adopt|export
@@ -81,9 +83,11 @@ def main(argv: list[str] | None = None) -> None:
         return
 
     if argv and argv[0] == "next":
-        if len(argv) < 2:
-            raise SystemExit("usage: firm next <matter-path>")
-        print(next_handoff_json(_resolve_matter_path(argv[1])))
+        embed = "--embed-prompts" in argv
+        paths = [a for a in argv[1:] if a != "--embed-prompts"]
+        if not paths:
+            raise SystemExit("usage: firm next [--embed-prompts] <matter-path>")
+        print(next_handoff_json(_resolve_matter_path(paths[0]), embed_prompts=embed))
         return
 
     if argv and argv[0] == "leg-start":

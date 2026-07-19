@@ -48,8 +48,6 @@ FIRM_ROLES = (
     "Shows = personality. Push back and close loops via VERDICT + DISPATCH.\n\n"
 )
 
-REVIEWER_AUTONOMY = FIRM_ROLES + LOOP_POWERS
-
 DISPATCH_INSTRUCTION = (
     "Mandatory final line — the engine routes from this:\n"
     "DISPATCH: tyagi|mike|jessica|harvey|closed"
@@ -64,83 +62,36 @@ VERDICT_INSTRUCTION = (
     + DISPATCH_INSTRUCTION
 )
 
+REVIEWER_TAIL = LOOP_POWERS + VERDICT_INSTRUCTION
+
 NO_FABRICATION = (
-    "JURISDICTION: Read brief.md and harvey-context.md — apply that law, not US default.\n\n"
-    "CITATION RULES (strict):\n"
-    "- **Record facts** (dates, order paragraphs, exhibit contents) must trace to `sources/` "
-    "or `sources/index.md` scope — cite the file name or mark [VERIFY].\n"
-    "- **Law** (statutes, sections, cases, tests): research with Read/Grep; every cite "
-    "carries **[VERIFY]** unless the same provision/case appears in sources/.\n"
-    "- **Pagination:** pin to the impugned order's/pleading's OWN internal pagination — the "
-    "document the bench holds — and declare the scheme once in a citation key. Merged-bundle "
-    "page numbers go only in an internal mapping annex, never in a deliverable's pins.\n"
-    "- **Full citations:** every authority carries its complete law-report citation at first "
-    "use (e.g. \"(2011) 14 SCC 770\"), not a bare case name.\n"
-    "- Never invent a case name, section number, or holding.\n"
+    "CITATION: brief.md + harvey-context.md jurisdiction. Record facts → sources/ or [VERIFY]. "
+    "Law → fetch or [VERIFY]. Pin impugned-order internal pages; full cite at first use. "
+    "No invented cases/sections.\n"
 )
 
 RECORD_SWEEP = (
-    "**RECORD SWEEP (mandatory before any outline or draft):**\n"
-    "1. Build a complete inventory of the record: read every index/annexure list; enumerate "
-    "every document of every party — including EVERY parallel proceeding (writs, company-law, "
-    "settlement, criminal, related references). Output the inventory with a read/unread mark "
-    "per item.\n"
-    "2. **No drafting while any party's substantive submissions are unread.** The winning "
-    "argument is usually in the document the pipeline skipped — the other side's own filings "
-    "and the co-respondents' submissions outrank a third read of our own.\n"
-    "3. **Waiver hunt:** for every procedural objection the opponent raises on appeal, answer "
-    "from the record: was it taken below? If not, waiver is the first answer — say so with the "
-    "pin that proves silence.\n"
-    "4. **Fetch list:** every statute to be quoted and every authority needing its full "
-    "citation goes on a fetch list resolved BEFORE the draft leg — fetched (bare Act, "
-    "compendium, law report), not flagged. A pipeline that can flag five sections can fetch "
-    "five sections.\n\n"
+    "**RECORD SWEEP:** inventory every party's filings (incl. parallel proceedings) read/unread; "
+    "no draft while opponent/co-respondent submissions unread; waiver hunt; fetch list resolved "
+    "before draft leg.\n\n"
 )
 
 GOLD_STANDARD = (
-    "**GOLD-STANDARD DRAFTING (house style — the pack templates encode it; follow both):**\n"
-    "- Open with the dispositive answers: the 2–4 numbered answers that decide the matter, "
-    "stated in bold before anything else. No atmosphere first.\n"
-    "- Numbered propositions in ARGUMENT ORDER, each opening with a bold one-sentence lead "
-    "counsel can speak verbatim; support in 2–5 sentences with inline pins; no unbroken "
-    "200-word paragraphs.\n"
-    "- **Completeness is measured against the OPPONENT's pleading, not our theory:** every "
-    "ground they raise (A–Z / 1–n) gets an answer somewhere — a spine of three points that "
-    "leaves their grounds unanswered is unfinished, however elegant.\n"
-    "- State statutes from fetched text; full citations for every authority; one citation "
-    "key, one pagination scheme (the impugned order's own pages).\n"
-    "- Keep the firm's differentiators: scripted anticipated bench questions with prepared "
-    "answers, live pivot notes to counsel, and fallback hedges (e.g. the claim survives on "
-    "the lower standard too).\n"
-    "- Say each point once, where it lives — no strategy-meta voice repeated across "
-    "sections.\n\n"
+    "**GOLD STANDARD:** dispositive answers first; numbered propositions with bold leads; "
+    "answer every opposing ground; one citation key; pack template headers are law.\n\n"
 )
 
 FINAL_GATE = (
-    "**FINAL GATE (anything that leaves the firm — adopted drafts and pack documents):**\n"
-    "- ZERO process language: no [VERIFY], no \"page not pinned\", no \"this leg/session\", "
-    "no source-file paths in pins, no pipeline branding (\"Prepared by the-firm\") — footers "
-    "name the responsible counsel and double as the citation key. Resolve every flag (fetch "
-    "it) or excise the claim; unresolved items move to the internal risk register only.\n"
-    "- Every authority: full citation. Every record pin: per the declared citation key.\n"
-    "- Client Briefing (2pp): dense two-page brief per the house exemplar — Facts (stakes in "
-    "figures first), Chronology, Findings under appeal, Questions of Law, numbered Arguments "
-    "mirroring the Notes, boxed Relief, citation-key footer. Exactly two printed pages.\n\n"
+    "**FINAL GATE:** no [VERIFY]/process language in deliverables — fetch or excise; footers = "
+    "counsel + citation key.\n\n"
 )
 
 WAIVER_HUNT = (
-    "**Waiver check (standard appellate move — run it every time):** for each procedural "
-    "objection the opponent presses, was it taken below? An objection not taken at the time "
-    "cannot found a remand — if the record shows silence, that is the first answer, with the "
-    "pin. Symmetrically, flag any objection WE press that was not taken below.\n\n"
+    "**Waiver:** each procedural objection — taken below? Silence + pin is the first answer.\n\n"
 )
 
 HARVEY_PIPE = (
-    "HARVEY CONTEXT (mandatory — Fable's live strategy piped to you; not in chat memory):\n"
-    "Read sources/index.md, then harvey-context.md. They hold record scope, theory of the case, "
-    "Tyagi/Jessica flags and Harvey's rulings, Mike must/must-not, and current dispatch. "
-    "Obey Mike must / must not on every Mike leg. Treat harvey-context.md as authoritative over "
-    "brief.md where they conflict on drafting instructions — but flag conflict in BRIEF PUSHBACK.\n"
+    "Read `sources/index.md`, then `harvey-context.md` (Mike must/must-not, dispatch, flags).\n\n"
 )
 
 
@@ -152,28 +103,24 @@ def _listing(folder: Path, matter: Path) -> str:
 
 
 def _harvey_packet(matter: Matter) -> str:
-    lines = [HARVEY_PIPE, "- sources/index.md", "- harvey-context.md"]
     notes = matter.latest_harvey_notes()
+    extra = ""
     if notes:
-        lines.append(f"- {notes.relative_to(matter.path)} (latest Harvey notes/rebuttal)")
-    return "\n".join(lines) + "\n\n"
+        extra = f"Also read `{notes.relative_to(matter.path)}` (latest Harvey notes).\n"
+    return HARVEY_PIPE + extra
 
 
-def _office(matter: Matter) -> str:
+def _office(matter: Matter, *, inline: bool = True) -> str:
     from .office import office_prompt_block
 
-    return office_prompt_block(matter)
+    return office_prompt_block(matter, inline=inline)
 
 
-def _leg_open(matter: Matter) -> str:
-    return _office(matter) + _harvey_packet(matter)
+def _leg_open(matter: Matter, *, inline_office: bool = False) -> str:
+    return _office(matter, inline=inline_office) + _harvey_packet(matter)
 
 
-OFFICE_ROOM = (
-    "THE OFFICE IS LIVE — colleagues may be speaking in parallel on other legs. "
-    "Read office.md; respond to Harvey and each other by name. "
-    "Your artifact opens with what you said in the room, then your formal notes.\n\n"
-)
+OFFICE_ROOM = "Read `office.md` — colleagues may be parallel; respond by name.\n\n"
 
 ROOM_ASSIGNMENTS_BLOCK = (
     "# Room assignments\n"
@@ -195,7 +142,7 @@ def _harvey_task(task: str) -> str:
 def harvey_proposal(matter: Matter) -> str:
     cfg = matter.config
     return (
-        f"{_office(matter)}"
+        f"{_office(matter, inline=True)}"
         f"You are **opening the office** — conductor, not clerk. OBJECTIVE: {cfg.get('objective')}\n"
         f"CAUSE TITLE: {cfg.get('cause_title') or '(set jurisdiction & forum in brief)'}\n\n"
         f"Sources:\n{matter.source_listing()}\n\n"
@@ -229,7 +176,7 @@ def harvey_conduct(matter: Matter, folder: Path, *, phase: str) -> str:
             "→ ship with residual risk.\n\n"
         )
     return (
-        f"{_office(matter)}"
+        f"{_office(matter, inline=True)}"
         f"{CLIENT_WORK}"
         f"{reopen}"
         f"Prior legs:\n{_listing(folder, matter.path)}\n\n"
@@ -274,7 +221,7 @@ def harvey_synthesize(matter: Matter, folder: Path, *, phase: str, reason: str =
             "No further Mike redrafts. DISPATCH: closed — partner sign-off with residual risk next.\n"
         )
     return (
-        f"{_office(matter)}"
+        f"{_office(matter, inline=True)}"
         f"{CLIENT_WORK}"
         "**Close the movement.** Your colleague returned — you rule and dispatch.\n\n"
         f"Read office.md, all legs since this movement opened:\n{_listing(folder, matter.path)}\n\n"
@@ -299,7 +246,7 @@ def delegated_task(matter: Matter, persona: str, task: str, folder: Path) -> str
     read = source_read_instruction(include_legs=f"Legs:\n{_listing(folder, matter.path)}")
     dispatch = (DISPATCH_INSTRUCTION + "\n\n") if persona == "mike" else ""
     return (
-        f"{_leg_open(matter)}"
+        f"{_leg_open(matter, inline_office=False)}"
         f"{OFFICE_ROOM}"
         f"{_harvey_task(task)}"
         f"You are **{persona.title()}** on Harvey's parallel task list.\n\n"
@@ -317,7 +264,7 @@ def delegated_task(matter: Matter, persona: str, task: str, folder: Path) -> str
 def jessica_office_take(matter: Matter, debate_dir: Path, *, task: str = "") -> str:
     read = source_read_instruction(include_legs=f"Debate legs:\n{_listing(debate_dir, matter.path)}")
     return (
-        f"{_leg_open(matter)}"
+        f"{_leg_open(matter, inline_office=False)}"
         f"{OFFICE_ROOM}"
         f"{_harvey_task(task)}"
         "You are in the room **before** Mike drafts — colleagues speaking in parallel.\n\n"
@@ -336,7 +283,7 @@ def jessica_office_take(matter: Matter, debate_dir: Path, *, task: str = "") -> 
 def mike_office_take(matter: Matter, debate_dir: Path, *, task: str = "") -> str:
     read = source_read_instruction(include_legs=f"Debate legs:\n{_listing(debate_dir, matter.path)}")
     return (
-        f"{_leg_open(matter)}"
+        f"{_leg_open(matter, inline_office=False)}"
         f"{OFFICE_ROOM}"
         f"{_harvey_task(task)}"
         "You are in the room **before** you draft — colleagues speaking in parallel.\n\n"
@@ -354,7 +301,7 @@ def mike_office_take(matter: Matter, debate_dir: Path, *, task: str = "") -> str
 def tyagi_brief_debate(matter: Matter, debate_dir: Path, *, task: str = "") -> str:
     read = source_read_instruction(include_legs=f"Debate:\n{_listing(debate_dir, matter.path)}")
     return (
-        f"{_leg_open(matter)}"
+        f"{_leg_open(matter, inline_office=False)}"
         f"{OFFICE_ROOM}"
         f"{_harvey_task(task)}"
         "BRIEF DEBATE — procedure map with Harvey. Hunt lapses in the client's favour; flag our "
@@ -362,14 +309,14 @@ def tyagi_brief_debate(matter: Matter, debate_dir: Path, *, task: str = "") -> s
         f"{read}\n\n"
         f"{WAIVER_HUNT}"
         "Number findings; FATAL/CURABLE/HARASSMENT-VALUE; state strike or cure.\n\n"
-        f"{REVIEWER_AUTONOMY}{VERDICT_INSTRUCTION}\n\n{NO_FABRICATION}"
+        f"{REVIEWER_TAIL}\n\n{NO_FABRICATION}"
     )
 
 
 def harvey_dispatch(matter: Matter, last_artifact: Path) -> str:
     rel = last_artifact.relative_to(matter.path)
     return (
-        f"{_office(matter)}"
+        f"{_office(matter, inline=True)}"
         f"Last leg: {rel}. You route the matter from the partner chair.\n\n"
         "Rule on every numbered objection in the room. Update harvey-context.md "
         "(Flags & rulings, Mike must/must-not, Current dispatch). "
@@ -422,7 +369,7 @@ def harvey_signoff(matter: Matter, round_dir: Path, draft: Path, *, cap_forced: 
 def mike_prep(matter: Matter, prep_dir: Path, *, task: str = "") -> str:
     read = source_read_instruction(include_legs=f"Debate legs:\n{_listing(prep_dir, matter.path)}")
     return (
-        f"{_leg_open(matter)}"
+        f"{_leg_open(matter, inline_office=False)}"
         f"{OFFICE_ROOM}"
         f"{_harvey_task(task)}"
         "PRE-DRAFT with Harvey — **not** the final work product yet.\n\n"
@@ -462,14 +409,14 @@ def tyagi_viability(matter: Matter, round_dir: Path, draft: Path | None, *, task
     legs_ctx = f"{debate_note}{draft_ctx}Prior legs:\n{_listing(round_dir, matter.path)}"
     read = source_read_instruction(include_legs=legs_ctx)
     return (
-        f"{_leg_open(matter)}"
+        f"{_leg_open(matter, inline_office=False)}"
         f"{OFFICE_ROOM}"
         f"{_harvey_task(task)}"
         "**Tyagi** (*Maamla Legal Hai* — procedure recall). Called back mid-pipeline.\n\n"
         f"{read}\n\n"
         f"{WAIVER_HUNT}"
         "Apply your lens ruthlessly. Number each material objection and state what would "
-        f"cure it.\n\n{REVIEWER_AUTONOMY}{VERDICT_INSTRUCTION}\n\n{NO_FABRICATION}"
+        f"cure it.\n\n{REVIEWER_TAIL}\n\n{NO_FABRICATION}"
     )
 
 
@@ -496,7 +443,7 @@ def mike_draft(matter: Matter, round_dir: Path, prior_draft: Path | None) -> str
     legs_ctx = f"{redraft}{cap_note}Prior legs:\n{_listing(round_dir, matter.path)}"
     read = source_read_instruction(include_legs=legs_ctx)
     return (
-        f"{_leg_open(matter)}"
+        f"{_leg_open(matter, inline_office=False)}"
         f"{CLIENT_WORK}"
         f"{read}\n\n"
         "Produce the **final work product** the brief calls for, in markdown. "
@@ -519,7 +466,7 @@ def jessica_review(matter: Matter, round_dir: Path, draft: Path, *, task: str = 
     rel = draft.relative_to(matter.path)
     read = source_read_instruction(include_legs=f"Prior legs:\n{_listing(round_dir, matter.path)}")
     return (
-        f"{_leg_open(matter)}"
+        f"{_leg_open(matter, inline_office=False)}"
         f"{OFFICE_ROOM}"
         f"{_harvey_task(task)}"
         f"Review the draft at {rel} as **opposing counsel** — third-party attack, not in-house counsel.\n"
@@ -537,7 +484,7 @@ def jessica_review(matter: Matter, round_dir: Path, draft: Path, *, task: str = 
         f"{FINAL_GATE}"
         "**Procedure** (limitation, forum, verification, record) → DISPATCH: tyagi. "
         "Merit → DISPATCH: mike or harvey.\n\n"
-        f"{REVIEWER_AUTONOMY}{VERDICT_INSTRUCTION}\n\n"
+        f"{REVIEWER_TAIL}\n\n"
         "End with: DISPATCH: harvey\n"
     )
 
@@ -545,28 +492,11 @@ def jessica_review(matter: Matter, round_dir: Path, draft: Path, *, task: str = 
 def mike_pack(matter: Matter, doc_list: str) -> str:
     cfg = matter.config
     return (
-        f"{_leg_open(matter)}"
+        f"{_leg_open(matter, inline_office=False)}"
         f"{CLIENT_WORK}"
-        "Fill the **client briefing pack** — four HTML documents (house templates in "
-        "`final/pack/`). Edit each file **in place**; preserve each template's structure, "
-        "inline styles, and CSS classes — the templates ARE the house format; read each "
-        "template's header comment and obey it.\n\n"
+        "Fill the **client briefing pack** — four HTML docs in `final/pack/`. "
+        "Edit in place; obey each template header comment.\n\n"
         f"Documents:\n{doc_list}\n\n"
-        "**Briefing Memo** — full brief, §1–§9: §1 ends with the bold numbered dispositive "
-        "answers; §6 the opposing case in full; §7 the order below as a numbered reasoning "
-        "chain; §9 argument-ordered propositions with bold one-sentence leads. ~3,000–3,500 "
-        "words.\n"
-        "**Argument Notes** — podium document: boxed 60-second opening; numbered speaking-order "
-        "propositions with bold leads and inline pins; notes-to-counsel (anticipated bench "
-        "questions, prepared answers, pivots); complete ground-by-ground sweep table. 3 pages.\n"
-        "**Client Briefing (2pp)** — dense two-page brief per the house exemplar: Facts (stakes "
-        "in figures first) · Chronology · Findings under appeal · Questions of Law · numbered "
-        "Arguments mirroring the Notes · boxed Relief · citation-key footer. Exactly 2 pages.\n"
-        "**Reference Table** — landscape lectern table, argument-ordered rows, verbatim record "
-        "quotes with pins, full citations, Primary/Secondary/Distinguish/Context tags; include "
-        "standard-of-review, waiver, and adverse-authority rows.\n\n"
-        "One citation key per document (the impugned order's internal pagination). "
-        "Footers name the responsible counsel from brief.md — never the pipeline.\n\n"
         f"{FINAL_GATE}"
         f"{source_read_instruction(include_legs='Read final/work-product.md for pack content.')}\n"
         f"Cause title: \"{cfg.get('cause_title') or cfg.get('slug', '')}\"\n\n"

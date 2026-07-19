@@ -7,6 +7,7 @@ from pathlib import Path
 
 from .cast import model_for_leg, surface_for_matter
 from .matter import Matter
+from .tokens import handoff_compact
 from .prompts import (
     delegated_task,
     harvey_conduct,
@@ -133,6 +134,30 @@ def artifact_path(matter: Matter, spec: LegSpec) -> Path | None:
     return _step_artifact_paths(matter, Step([spec]))[0]
 
 
+def _prompt_rel(spec: LegSpec) -> str:
+    return f".firm/legs/{spec.persona}-{spec.kind}.prompt.md"
+
+
+def _write_leg_prompt(matter: Matter, spec: LegSpec, prompt: str) -> str:
+    rel = _prompt_rel(spec)
+    path = matter.path / rel
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(prompt, encoding="utf-8")
+    return rel
+
+
+def _attach_prompt(entry: dict, matter: Matter, spec: LegSpec, prompt: str, *, embed: bool) -> None:
+    if embed or not handoff_compact(matter, embed=embed):
+        entry["prompt"] = prompt
+        return
+    rel = _write_leg_prompt(matter, spec, prompt)
+    entry["prompt_file"] = rel
+    entry["spawn"] = (
+        f"Read `{rel}` for full leg instructions. Write only to OUT artifact. "
+        "Do not paste the prompt back into chat."
+    )
+
+
 def prompt_for_leg(matter: Matter, spec: LegSpec) -> str:
     task = spec.task
     folder = _folder_for_spec(matter, spec) or _debate_dir(matter)
@@ -212,7 +237,7 @@ def _batch_meta(matter: Matter, step: Step, artifact_paths: list[Path | None]) -
     }
 
 
-def next_handoff(matter: Matter) -> dict:
+def next_handoff(matter: Matter, *, embed_prompts: bool = False) -> dict:
     step: Step = next_step(matter)
     surface = surface_for_matter(matter)
     if step.pause:
@@ -253,7 +278,13 @@ def next_handoff(matter: Matter) -> dict:
                     "final/pack/*.pdf (Briefing Memo, Argument Notes, Client Briefing 2pp, Reference Table)"
                 )
         elif spec.persona != "__engine__":
-            entry["prompt"] = prompt_for_leg(matter, spec)
+            _attach_prompt(
+                entry,
+                matter,
+                spec,
+                prompt_for_leg(matter, spec),
+                embed=embed_prompts,
+            )
         legs.append(entry)
     batch = _batch_meta(matter, step, artifact_paths)
     phase = compute_phase(matter).value
@@ -286,5 +317,5 @@ def next_handoff(matter: Matter) -> dict:
     return out
 
 
-def next_handoff_json(matter: Matter) -> str:
-    return json.dumps(next_handoff(matter), indent=2)
+def next_handoff_json(matter: Matter, *, embed_prompts: bool = False) -> str:
+    return json.dumps(next_handoff(matter, embed_prompts=embed_prompts), indent=2)

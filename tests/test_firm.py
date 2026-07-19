@@ -1,5 +1,6 @@
 """Core firm tests — cast, routing, record, setup."""
 
+import json
 from pathlib import Path
 
 import pytest
@@ -35,7 +36,7 @@ def test_cast_and_handoff(tmp_path, monkeypatch):
     hop = next_handoff(m)
     assert hop["legs"][0]["persona"] == "harvey"
     assert hop["legs"][0]["mode"] == "harvey"
-    assert "prompt" in hop["legs"][0]
+    assert "prompt" in hop["legs"][0] or "prompt_file" in hop["legs"][0]
 
 
 def test_state_machine_flow(tmp_path, monkeypatch):
@@ -176,6 +177,28 @@ def test_jessica_correction_loop(tmp_path, monkeypatch):
     assert step.legs[0].persona == "jessica" and step.legs[0].kind == "review"
 
 
+def test_compact_handoff_writes_prompt_file(tmp_path, monkeypatch):
+    monkeypatch.setenv("FIRM_MATTERS", str(tmp_path))
+    m = Matter.create("c", "obj", root=tmp_path)
+    (m.path / "brief-debate").mkdir(exist_ok=True)
+    hop = next_handoff(m)
+    leg = hop["legs"][0]
+    assert "prompt_file" in leg
+    assert "prompt" not in leg
+    pf = m.path / leg["prompt_file"]
+    assert pf.is_file() and len(pf.read_text(encoding="utf-8")) > 200
+    assert len(json.dumps(hop)) < 2500
+
+
+def test_embed_prompts_handoff(tmp_path, monkeypatch):
+    monkeypatch.setenv("FIRM_MATTERS", str(tmp_path))
+    m = Matter.create("e", "obj", root=tmp_path)
+    (m.path / "brief-debate").mkdir(exist_ok=True)
+    hop = next_handoff(m, embed_prompts=True)
+    assert "prompt" in hop["legs"][0]
+    assert "prompt_file" not in hop["legs"][0]
+
+
 def test_round_cap_forces_signoff(tmp_path, monkeypatch):
     from firm.caps import review_cap_reached
 
@@ -197,8 +220,10 @@ def test_round_cap_forces_signoff(tmp_path, monkeypatch):
     assert step.legs[0].reason == "round-cap"
 
     hop = next_handoff(m)
-    assert "ROUND CAP" in hop["legs"][0]["prompt"]
-    assert "REDRAFT is not available" in hop["legs"][0]["prompt"]
+    leg0 = hop["legs"][0]
+    prompt_text = leg0.get("prompt") or (m.path / leg0["prompt_file"]).read_text(encoding="utf-8")
+    assert "ROUND CAP" in prompt_text
+    assert "REDRAFT is not available" in prompt_text
 
 
 def test_residual_risk_signoff_adopts(tmp_path, monkeypatch):

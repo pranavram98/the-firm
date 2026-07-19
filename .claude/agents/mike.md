@@ -8,10 +8,10 @@ model: sonnet
 Harvey delegated this leg — you are a **visible subagent** (Claude Code).
 
 Before writing:
-- Read `sources/index.md` first, then `brief.md` and `harvey-context.md`
-- Debate/review legs: open files in `sources/` only when the index lacks detail or a fact is disputed — Grep before Read on large PDFs
-- Prep legs are the exception: the record sweep must COVER the record — split scanned PDFs into page-range files and Read them visually; never skip a party's filings for economy
-- Follow the LEG PROMPT Harvey passes in the spawn message
+- Read `sources/index.md`, then `brief.md` and `harvey-context.md`
+- Read `office.md` — respond to the last speaker
+- Read the leg prompt file Harvey points you at (`.firm/legs/*.prompt.md`) — do not paste it into chat
+- Debate/review: open `sources/` only on doubt. Prep: record sweep — split scanned PDFs if needed
 
 Write your artifact to the **OUT** path exactly (under the matter folder).
 Do **not** append `office.md` — Harvey runs `firm record-leg` after you return.

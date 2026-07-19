@@ -6,6 +6,7 @@ import re
 from pathlib import Path
 
 from .matter import Matter
+from .tokens import index_preview_chars
 
 LARGE_BYTES = 5 * 1024 * 1024
 TEXT_PREVIEW = 600
@@ -22,7 +23,7 @@ def _human_size(n: int) -> str:
     return f"{n}B"
 
 
-def _preview(path: Path) -> str:
+def _preview(path: Path, *, max_chars: int = TEXT_PREVIEW) -> str:
     if path.suffix.lower() not in TEXT_SUFFIXES:
         return ""
     try:
@@ -30,14 +31,14 @@ def _preview(path: Path) -> str:
     except OSError:
         return ""
     one = " ".join(raw.split())
-    if len(one) <= TEXT_PREVIEW:
+    if len(one) <= max_chars:
         return one
-    return one[:TEXT_PREVIEW].rstrip() + "…"
+    return one[:max_chars].rstrip() + "…"
 
 
-def _auto_note(path: Path, size: int) -> str:
+def _auto_note(path: Path, size: int, *, preview_chars: int = TEXT_PREVIEW) -> str:
     if path.suffix.lower() in TEXT_SUFFIXES:
-        prev = _preview(path)
+        prev = _preview(path, max_chars=preview_chars)
         if prev:
             return prev
     if size >= LARGE_BYTES:
@@ -69,7 +70,7 @@ def build_sources_index(matter: Matter) -> Path:
             continue
         rel = path.relative_to(matter.sources).as_posix()
         size = path.stat().st_size
-        note = _auto_note(path, size)
+        note = _auto_note(path, size, preview_chars=index_preview_chars(matter))
         rows.append(f"| `{rel}` | {_human_size(size)} | {note} |")
         if size >= LARGE_BYTES:
             large.append(rel)
@@ -101,9 +102,8 @@ def build_sources_index(matter: Matter) -> Path:
 
 def source_read_instruction(*, include_legs: str = "") -> str:
     base = (
-        "Read `sources/index.md` first, then `brief.md` and `harvey-context.md`. "
-        "Open originals in `sources/` only when a fact is disputed or the index lacks detail — "
-        "Grep before Read on large PDFs."
+        "Read `sources/index.md`, then `brief.md` and `harvey-context.md`. "
+        "Open `sources/` only on doubt — Grep before Read on large PDFs."
     )
     if include_legs:
         return f"{base}\n{include_legs}"

@@ -6,7 +6,7 @@ import threading
 from datetime import datetime, timezone
 from pathlib import Path
 
-from .matter import Matter
+from .tokens import office_max_chars
 
 OFFICE_HEADER = """# The office
 
@@ -83,22 +83,24 @@ def append_speech(
             f.write(block)
 
 
-def recent_transcript(matter: Matter, *, max_chars: int = 6000) -> str:
+def recent_transcript(matter: Matter, *, max_chars: int | None = None) -> str:
+    cap = max_chars if max_chars is not None else office_max_chars(matter)
     p = office_path(matter)
     if not p.exists():
         return "(office empty — you are first in the room)"
     text = p.read_text(encoding="utf-8")
-    if len(text) <= max_chars:
+    if len(text) <= cap:
         return text
-    return "…(earlier conversation truncated)…\n\n" + text[-max_chars:]
+    return "…(earlier conversation truncated)…\n\n" + text[-cap:]
 
 
-def office_prompt_block(matter: Matter) -> str:
+def office_prompt_block(matter: Matter, *, inline: bool = True) -> str:
+    if not inline:
+        return "THE OFFICE: read `office.md` — respond to the last speaker.\n\n"
     return (
         "THE OFFICE (read this first — you are in the room; respond to the last speaker):\n"
         f"{recent_transcript(matter)}\n\n"
-        "Speak directly: address the last objection, ruling, or draft. Then do your leg work. "
-        "Your artifact is also the formal record — but the office must feel like colleagues talking.\n\n"
+        "Speak directly: address the last objection, ruling, or draft. Then do your leg work.\n\n"
     )
 
 

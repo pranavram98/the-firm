@@ -25,7 +25,7 @@ Subagents: `~/.agents/agents/{tyagi,mike,jessica}.md` · `firm install-skill cod
 
 ## Your leg
 
-Harvey pastes **MATTER**, **OUT**, **TASK**, and the leg prompt. Write only to **OUT**. Do **not** append `office.md` — Harvey runs `firm record-leg`.
+Harvey pastes **MATTER**, **OUT**, **TASK**, and **`prompt_file`**. Read that file — do **not** paste it into chat. Write only to **OUT**.
 
 ## Large records
 

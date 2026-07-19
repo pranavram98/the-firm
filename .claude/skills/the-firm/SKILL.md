@@ -39,10 +39,17 @@ Subagents: `~/.claude/agents/{tyagi,mike,jessica}.md` · `firm install-skill cla
 
 ## Loop
 
-1. **`firm next <matter>`** — `legs[]`, `phase`, `office` path
-2. Harvey opens/closes · spawn subagents per `legs[]`
+1. **`firm next <matter>`** — `legs[]`, `phase`, `office` path. **Token rule:** leg prompts live in `.firm/legs/*.prompt.md` — read the file when spawning; do **not** paste prompts into chat.
+2. Harvey opens/closes · spawn subagents per `legs[]` (MATTER + OUT + read `prompt_file`)
 3. **`firm record-leg`** each artifact · **`firm engine`** when `engine` leg
 4. Repeat until **`pause: true`** · one line to the lawyer from `do`
+
+## Token discipline
+
+- **Index first** — `sources/index.md` before bulk `sources/` reads.
+- **Office** — delegated legs read `office.md`; Harvey gets a truncated tail only in his legs.
+- **No prompt dumps** — subagents read `.firm/legs/` files; Harvey keeps handoff JSON out of context.
+- Debug only: `firm next --embed-prompts` inlines full prompts (expensive).
 
 ## Large records
 
@@ -86,8 +93,7 @@ Work: `~/Documents/firm-matters/<slug>/` · `office.md`
 MATTER: <path>
 OUT: <artifact>
 TASK: <from firm next legs[].task>
-
-<paste prompt>
+Read: <legs[].prompt_file>   # full instructions — do not paste into chat
 ```
 
 Write only to OUT (pack leg: edit HTML in `final/pack/` in place, notes to OUT). Harvey runs `firm record-leg` after return.
