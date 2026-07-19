@@ -86,8 +86,12 @@ def build_sources_index(matter: Matter) -> Path:
 
     body = (
         "# Record index\n\n"
-        "**Read this file first on every leg.** Use `brief.md` and `harvey-context.md` next. "
-        "Open files under `sources/` **only** when a fact is disputed or this index lacks detail.\n\n"
+        "**Read this file first on every leg** — then `brief.md` and `harvey-context.md`. "
+        "Previews in the Files table are **routing hints only**; they do not substitute for "
+        "reading substantive filings when your leg requires it (see leg prompt read depth).\n\n"
+        "**By leg:** brief-debate + prep + draft → read scoped/substantive files **in full** "
+        "(split large scans). Review legs → draft + index first; open originals when a pin, "
+        "quote, or procedure turn needs the source.\n\n"
         "## Scope\n\n"
         f"{scope}\n"
         "## Files\n\n"
@@ -100,11 +104,49 @@ def build_sources_index(matter: Matter) -> Path:
     return index_path
 
 
-def source_read_instruction(*, include_legs: str = "") -> str:
-    base = (
-        "Read `sources/index.md`, then `brief.md` and `harvey-context.md`. "
-        "Open `sources/` only on doubt — Grep before Read on large PDFs."
-    )
+_INDEX_FIRST = (
+    "Read `sources/index.md`, then `brief.md` and `harvey-context.md`. "
+    "Index previews are routing only — not a substitute for reading substantive filings "
+    "when your leg requires it."
+)
+
+READ_MODES: dict[str, str] = {
+    "default": (
+        _INDEX_FIRST + " Open `sources/` when a fact is disputed or the index lacks detail — "
+        "Grep before Read on large PDFs."
+    ),
+    "debate": (
+        _INDEX_FIRST + " **Brief debate / procedure map:** read **in full** — impugned order, "
+        "synopsis/cause papers, limitation/service/verification filings, and every file Harvey "
+        "lists in index ## Scope. Waiver and record pins require the actual filing, not the "
+        "preview. Grep/split large PDFs; read page-ranges visually."
+    ),
+    "prep": (
+        _INDEX_FIRST + " **Prep / record sweep:** read **every substantive filing of every party** "
+        "(incl. parallel proceedings) — mark read/unread per index row. Index-only prep is a "
+        "FATAL failure. Split scanned PDFs into page-ranges; Read visually."
+    ),
+    "draft": (
+        _INDEX_FIRST + " **Draft leg:** every item marked READ in prep must be open; every pin "
+        "traces to a full read of that source. Open `sources/` for any fact you cite."
+    ),
+    "review": (
+        _INDEX_FIRST + " **Review leg:** draft + index first; open `sources/` when a pin is "
+        "missing, a quote looks wrong, or procedure turns on record text the index cannot show."
+    ),
+    "office": (
+        _INDEX_FIRST + " **Office take:** read debate legs + index; open scoped `sources/` "
+        "before making a substantive record claim."
+    ),
+    "task": (
+        _INDEX_FIRST + " **Assigned task:** read every source the task requires **in full** — "
+        "do not answer from index previews alone."
+    ),
+}
+
+
+def source_read_instruction(*, include_legs: str = "", mode: str = "default") -> str:
+    base = READ_MODES.get(mode, READ_MODES["default"])
     if include_legs:
         return f"{base}\n{include_legs}"
     return base

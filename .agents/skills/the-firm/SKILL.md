@@ -29,7 +29,7 @@ Harvey pastes **MATTER**, **OUT**, **TASK**, and **`prompt_file`**. Read that fi
 
 ## Large records
 
-At `firm open`, the engine writes **`sources/index.md`**. Debate/review legs read the **index first**; originals in `sources/` **only on doubt**.
+At `firm open`, the engine writes **`sources/index.md`**. **Index first on every leg** — but prep/debate/draft still **read substantive filings in full** (split large scans). Review legs use index + draft; open originals when a pin or procedure turn needs the source.
 
 **Prep is the exception — coverage beats economy.** Mike's prep opens with a **record sweep**: inventory every document of every party from the index/annexure lists (including every parallel proceeding — writs, company-law, settlement, criminal), read/unread mark per item; **no drafting while any party's substantive submissions are unread**. Scanned PDFs: split page-ranges (pypdf) into `sources/splits/` and Read visually; chart printed-vs-PDF page offsets in the index Scope.
 

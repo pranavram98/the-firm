@@ -36,4 +36,5 @@ def test_open_matter_and_ingest(tmp_path, monkeypatch):
     prompt = mike_draft(m, rd, None)
     assert "sources/index.md" in prompt
     assert "harvey-context.md" in prompt
+    assert "in full" in prompt.lower() or "marked read" in prompt.lower()
     assert "every file in sources" not in prompt

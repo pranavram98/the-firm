@@ -46,14 +46,15 @@ Subagents: `~/.claude/agents/{tyagi,mike,jessica}.md` · `firm install-skill cla
 
 ## Token discipline
 
-- **Index first** — `sources/index.md` before bulk `sources/` reads.
+- **Index first** — `sources/index.md` before bulk `sources/` reads. Previews are routing hints, **not** a substitute for reading substantive filings on prep/debate/draft legs.
+- **Read depth by leg** — brief-debate + prep + draft require full reads of scoped/substantive files; review legs open originals when pins or procedure need the source.
 - **Office** — delegated legs read `office.md`; Harvey gets a truncated tail only in his legs.
 - **No prompt dumps** — subagents read `.firm/legs/` files; Harvey keeps handoff JSON out of context.
 - Debug only: `firm next --embed-prompts` inlines full prompts (expensive).
 
 ## Large records
 
-At `firm open`, the engine writes **`sources/index.md`** (file list, sizes, text previews). Debate/review legs read the **index first**; originals in `sources/` **only on doubt**. Harvey fills **Scope** in the index after reading synopsis/order.
+At `firm open`, the engine writes **`sources/index.md`** (file list, sizes, text previews). **Index first on every leg** — but prep/debate/draft still **read substantive filings in full** (split large scans). Review legs use index + draft; open originals when a pin, quote, or procedure turn needs the source. Harvey fills **Scope** in the index after reading synopsis/order.
 
 **Prep is the exception — coverage beats economy.** Mike's prep opens with a **record sweep**: inventory every document of every party from the index/annexure lists (including every parallel proceeding — writs, company-law, settlement, criminal), read/unread mark per item; **no drafting while any party's substantive submissions are unread**. Scanned PDFs: split page-ranges (pypdf) into `sources/splits/` and Read visually; chart printed-vs-PDF page offsets in the index Scope.
 

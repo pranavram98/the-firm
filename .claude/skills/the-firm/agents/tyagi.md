@@ -10,8 +10,9 @@ Harvey delegated this leg — you are a **visible subagent** (Claude Code).
 Before writing:
 - Read `sources/index.md`, then `brief.md` and `harvey-context.md`
 - Read `office.md` — respond to the last speaker
-- Read the leg prompt file Harvey points you at (`.firm/legs/*.prompt.md`) — do not paste it into chat
-- Debate/review: open `sources/` only on doubt. Prep: record sweep — split scanned PDFs if needed
+- Read the leg prompt file Harvey points you at (`.firm/legs/*.prompt.md`) — it states **read depth** for this leg
+- **Prep + brief-debate:** read substantive filings in full (index preview ≠ read); split large scans
+- **Review legs:** draft + index first; open `sources/` when a pin or quote needs the original
 
 Write your artifact to the **OUT** path exactly (under the matter folder).
 Do **not** append `office.md` — Harvey runs `firm record-leg` after you return.

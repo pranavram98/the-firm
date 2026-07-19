@@ -42,7 +42,7 @@ Harvey runs the pipeline to **`pause: complete`** — adopt, then Mike fills the
 
 **Timing:** ~3–8 min per leg · ~30–60 min full matter · caps: 3 Tyagi brief passes, 2 Mike prep, 3 drafts.
 
-**Large records:** split big scans before open; the engine builds `sources/index.md`. Everyone reads the index first — open originals only when a fact is disputed.
+**Large records:** split big scans before open; the engine builds `sources/index.md`. Index first on every leg — but **prep, brief-debate, and draft still read substantive filings in full**; review legs open originals when a pin or procedure turn needs the source.
 
 **Universal rule:** procedure before merits — Tyagi maps procedure before Mike drafts; no merits-heavy work while procedure is open.
 

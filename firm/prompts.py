@@ -71,9 +71,10 @@ NO_FABRICATION = (
 )
 
 RECORD_SWEEP = (
-    "**RECORD SWEEP:** inventory every party's filings (incl. parallel proceedings) read/unread; "
-    "no draft while opponent/co-respondent submissions unread; waiver hunt; fetch list resolved "
-    "before draft leg.\n\n"
+    "**RECORD SWEEP (prep — mandatory):** inventory every party's filings (incl. parallel "
+    "proceedings); **Read each substantive filing in full** — index preview ≠ read; "
+    "read/unread mark per row; no draft while opponent/co-respondent submissions unread; "
+    "waiver hunt; fetch list resolved before draft leg.\n\n"
 )
 
 GOLD_STANDARD = (
@@ -243,7 +244,9 @@ def harvey_synthesize(matter: Matter, folder: Path, *, phase: str, reason: str =
 
 
 def delegated_task(matter: Matter, persona: str, task: str, folder: Path) -> str:
-    read = source_read_instruction(include_legs=f"Legs:\n{_listing(folder, matter.path)}")
+    read = source_read_instruction(
+        mode="task", include_legs=f"Legs:\n{_listing(folder, matter.path)}"
+    )
     dispatch = (DISPATCH_INSTRUCTION + "\n\n") if persona == "mike" else ""
     return (
         f"{_leg_open(matter, inline_office=False)}"
@@ -262,7 +265,9 @@ def delegated_task(matter: Matter, persona: str, task: str, folder: Path) -> str
 
 
 def jessica_office_take(matter: Matter, debate_dir: Path, *, task: str = "") -> str:
-    read = source_read_instruction(include_legs=f"Debate legs:\n{_listing(debate_dir, matter.path)}")
+    read = source_read_instruction(
+        mode="office", include_legs=f"Debate legs:\n{_listing(debate_dir, matter.path)}"
+    )
     return (
         f"{_leg_open(matter, inline_office=False)}"
         f"{OFFICE_ROOM}"
@@ -281,7 +286,9 @@ def jessica_office_take(matter: Matter, debate_dir: Path, *, task: str = "") -> 
 
 
 def mike_office_take(matter: Matter, debate_dir: Path, *, task: str = "") -> str:
-    read = source_read_instruction(include_legs=f"Debate legs:\n{_listing(debate_dir, matter.path)}")
+    read = source_read_instruction(
+        mode="office", include_legs=f"Debate legs:\n{_listing(debate_dir, matter.path)}"
+    )
     return (
         f"{_leg_open(matter, inline_office=False)}"
         f"{OFFICE_ROOM}"
@@ -299,7 +306,9 @@ def mike_office_take(matter: Matter, debate_dir: Path, *, task: str = "") -> str
 
 
 def tyagi_brief_debate(matter: Matter, debate_dir: Path, *, task: str = "") -> str:
-    read = source_read_instruction(include_legs=f"Debate:\n{_listing(debate_dir, matter.path)}")
+    read = source_read_instruction(
+        mode="debate", include_legs=f"Debate:\n{_listing(debate_dir, matter.path)}"
+    )
     return (
         f"{_leg_open(matter, inline_office=False)}"
         f"{OFFICE_ROOM}"
@@ -343,7 +352,9 @@ def harvey_signoff(matter: Matter, round_dir: Path, draft: Path, *, cap_forced: 
         if cap_forced
         else f"{_office(matter)}Jessica CLEARED on {rel}. **Final partner sign-off** — close the matter.\n"
     )
-    read = source_read_instruction(include_legs=f"Prior legs:\n{_listing(round_dir, matter.path)}")
+    read = source_read_instruction(
+        mode="review", include_legs=f"Prior legs:\n{_listing(round_dir, matter.path)}"
+    )
     return header + cap_block + (
         f"\n{read}\n"
         "Read the draft and Jessica's opposing-counsel review.\n\n"
@@ -367,7 +378,9 @@ def harvey_signoff(matter: Matter, round_dir: Path, draft: Path, *, cap_forced: 
 
 
 def mike_prep(matter: Matter, prep_dir: Path, *, task: str = "") -> str:
-    read = source_read_instruction(include_legs=f"Debate legs:\n{_listing(prep_dir, matter.path)}")
+    read = source_read_instruction(
+        mode="prep", include_legs=f"Debate legs:\n{_listing(prep_dir, matter.path)}"
+    )
     return (
         f"{_leg_open(matter, inline_office=False)}"
         f"{OFFICE_ROOM}"
@@ -407,7 +420,7 @@ def tyagi_viability(matter: Matter, round_dir: Path, draft: Path | None, *, task
         else ""
     )
     legs_ctx = f"{debate_note}{draft_ctx}Prior legs:\n{_listing(round_dir, matter.path)}"
-    read = source_read_instruction(include_legs=legs_ctx)
+    read = source_read_instruction(mode="debate", include_legs=legs_ctx)
     return (
         f"{_leg_open(matter, inline_office=False)}"
         f"{OFFICE_ROOM}"
@@ -441,7 +454,7 @@ def mike_draft(matter: Matter, round_dir: Path, prior_draft: Path | None) -> str
             "close all open corrections now.\n"
         )
     legs_ctx = f"{redraft}{cap_note}Prior legs:\n{_listing(round_dir, matter.path)}"
-    read = source_read_instruction(include_legs=legs_ctx)
+    read = source_read_instruction(mode="draft", include_legs=legs_ctx)
     return (
         f"{_leg_open(matter, inline_office=False)}"
         f"{CLIENT_WORK}"
@@ -464,14 +477,15 @@ def mike_draft(matter: Matter, round_dir: Path, prior_draft: Path | None) -> str
 
 def jessica_review(matter: Matter, round_dir: Path, draft: Path, *, task: str = "") -> str:
     rel = draft.relative_to(matter.path)
-    read = source_read_instruction(include_legs=f"Prior legs:\n{_listing(round_dir, matter.path)}")
+    read = source_read_instruction(
+        mode="review", include_legs=f"Prior legs:\n{_listing(round_dir, matter.path)}"
+    )
     return (
         f"{_leg_open(matter, inline_office=False)}"
         f"{OFFICE_ROOM}"
         f"{_harvey_task(task)}"
         f"Review the draft at {rel} as **opposing counsel** — third-party attack, not in-house counsel.\n"
         f"{read}\n\n"
-        "Use the draft and index — open `sources/` originals only if a cited fact looks wrong.\n\n"
         "Attack like OC: facts vs record, weakest link, bench irritants, exposure. "
         "**Procedure before merits** — if limitation, forum, verification, service, or record "
         "is live or unchecked, DISPATCH: tyagi; do not merit-spiral past open procedure.\n"
@@ -498,7 +512,7 @@ def mike_pack(matter: Matter, doc_list: str) -> str:
         "Edit in place; obey each template header comment.\n\n"
         f"Documents:\n{doc_list}\n\n"
         f"{FINAL_GATE}"
-        f"{source_read_instruction(include_legs='Read final/work-product.md for pack content.')}\n"
+        f"{source_read_instruction(mode='draft', include_legs='Read final/work-product.md for pack content.')}\n"
         f"Cause title: \"{cfg.get('cause_title') or cfg.get('slug', '')}\"\n\n"
         "Write a short `# Office` note in OUT (_mike-pack-notes.md) confirming pack complete.\n"
         f"Last line: DISPATCH: closed\n\n"
